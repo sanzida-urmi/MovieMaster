@@ -7,10 +7,11 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
 
 
 function Register() {
-  const { signInWithGoogle } = use(AuthContext);
+  const { signInWithGoogle,createUser,setUser,updateProfileFunction } = use(AuthContext);
   const [see, setSee] = useState(false);
     const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ function Register() {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        toast.success("Registration successful");
 
         // navigate(location?.state || "/");
         navigate("/");
@@ -48,7 +50,49 @@ function Register() {
     }
     console.log(name, email, photo, password);
 
-    // toast.success("Registration successful");
+    // createUser(email,password)
+    // .then((res) => {
+    //   const user = res.user;
+    //   const stored = localStorage.getItem("store") || "/";
+    //   localStorage.removeItem("store");
+    //   updateProfileFunction(user, {
+    //     displayName: name,
+    //     photoURL: photo,
+    //   })
+    //     .then(() => {
+    //       setUser({ ...user, displayName: name, photoURL: photo });
+    //       console.log(res);
+    //       setLoading(false);
+    //       navigate(stored);
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //       toast.error(e.message);
+    //     });
+    // });
+
+     createUser(email, password).then((res) => {
+      const user = res.user;
+      const stored = localStorage.getItem("store") || "/";
+      localStorage.removeItem("store");
+      updateProfile(user, {
+        displayName: name,
+        photoURL: photo,
+      })
+        .then(() => {
+          setUser({ ...user, displayName: name, photoURL: photo });
+          console.log(user);
+          // setLoading(false);
+          navigate(stored);
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error(e.message);
+        });
+    });
+   
+
+   
 
   };
   return (
@@ -109,13 +153,15 @@ function Register() {
 
                 <span
                   onClick={() => setSee(!see)}
-                  className="absolute right-[8px] top-[36px] cursor-pointer z-2"
+                  className="absolute right-[13px] top-[39px] cursor-pointer z-2"
                 >
                   {see ? <FaEye /> : <IoEyeOff />}
                 </span>
               </div>
 
 <button type="submit" className="btn  mt-10 btn-error">Register</button>
+ </fieldset>
+          </form>
 
 
               <button onClick={handleGoogle}   className="btn bg-white text-black border-[#e5e5e5]">
@@ -154,8 +200,7 @@ function Register() {
               <span className="text-blue-600">Login</span></Link>
             </p>
 
-            </fieldset>
-          </form>
+           
           
         </div>
       </div>
