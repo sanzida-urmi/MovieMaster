@@ -27,14 +27,14 @@ function Navbar() {
   }
 
     const links = <>
-    <li><NavLink to="/">Home</NavLink></li>
-     <li><NavLink to="/movies">All Movies</NavLink></li>
+    <li className='font-semibold'><NavLink to="/">Home</NavLink></li>
+     <li className='font-semibold'><NavLink to="/movies">All Movies</NavLink></li>
  {
         user && 
         <>
-        <li><NavLink to="/myprofile">My Profile</NavLink></li>
-        <li><NavLink to="/movies/my-collection">My Collections</NavLink></li>
-        <li><NavLink to="/movies/add">Add Movie</NavLink></li>
+        <li className='font-semibold'><NavLink to="/myprofile">My Profile</NavLink></li>
+        <li className='font-semibold'><NavLink to="/movies/my-collection">My Collections</NavLink></li>
+        <li className='font-semibold'><NavLink to="/movies/add">Add Movie</NavLink></li>
         </>
      }
      </>
@@ -56,7 +56,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar  bg-base-100 shadow-sm border-1 border-red-800 rounded-2xl mb-20">
+    <div className="navbar shadow-sm   bg-base-300 rounded-2xl mt-0">
   <div className="navbar-start navv">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

@@ -67,9 +67,9 @@ setLoading(false)
         </div>
 
         <div className="card bg-red-300 w-full max-w-sm shrink-0 shadow-2xl">
-          <h1 className="text-red-700 text-2xl font-semibold">Please Login</h1>
+          
         <div className="card-body text-orange-600">
-
+<h1 className="text-red-700 text-2xl font-semibold">Please Login</h1>
           <form onSubmit={signinhandle}>
             <fieldset className="fieldset">
 
