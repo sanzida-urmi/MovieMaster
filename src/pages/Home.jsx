@@ -3,7 +3,11 @@ import { useLoaderData } from 'react-router'
 import MovieCard from '../components/MovieCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Pagination,Autoplay,Navigation} from "swiper/modules";
-
+import { PiStarDuotone } from "react-icons/pi";
+import { BsMoonStars } from "react-icons/bs";
+import star from "../assets/star.png"
+import starr from "../assets/starr.png"
+import {motion} from 'framer-motion';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -92,6 +96,44 @@ fetch("http://localhost:5000/recent")
          {recentmovie.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>
+
+<div className="text-center text-xl font-bold my-10">Latest movies</div>
+<div className='flex gap-30 mx-auto justify-center items-center'>
+
+  <div>
+  <motion.img
+   transition={{
+    repeat: Infinity,
+    duration: 2,
+    ease: "linear",
+  }}
+      
+   animate={{scale: [1,2,1], rotate:360, x: [0,100,-100,0]}}  className='h-20' src={starr} alt="" />
+</div>
+  <div><ul>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Action</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Adventure</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Comedy</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Crime</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Drama</li>
+  </ul>
+  <ul>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Fantasy</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Horror</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Romance</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> Thriller</li>
+  <li className='flex items-center gap-2'><PiStarDuotone /> War</li>
+</ul></div>
+</div>
+
+<div className="text-center text-xl font-bold my-10">About MovieMaster Pro</div>
+<p className='mb-5 '> MovieMaster Pro is a smart movie management system that lets users easily browse, filter, and organize their favorite movies. You can explore films by genre, rating or release year and even create your own personal collections.</p>
+
+<div className='flex items-center gap-3'>
+  <p className='text-yellow-400'><BsMoonStars /></p>
+<p className='text-yellow-400'>With a clean interface and smooth performance, MovieMaster Pro brings your movie world together in one place.</p>
+</div>
+
 
 
     </div>

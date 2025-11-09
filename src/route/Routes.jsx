@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AllMovies from "../pages/AllMovies";
+import Myprofile from "../pages/Myprofile";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
           path: "/movies",
           element: <AllMovies></AllMovies>,
           loader:  () => fetch('http://localhost:5000/movies')
+        },
+        {
+          path: "/myprofile",
+          element: <Myprofile></Myprofile>
         }
     ]
   },
