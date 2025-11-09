@@ -10,16 +10,38 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { AuthContext } from '../context/AuthContext';
 
-
-
-  
-
 function Home() {
+  const [ratedmovie, setRatedmovie] = useState([])
+  const [recentmovie, setRecentmovie] = useState([])
+
+  useEffect(()=>{
+fetch("http://localhost:5000/rate")
+.then(res=>res.json())
+.then(data =>{
+  // console.log(data)
+  setRatedmovie(data)
+})
+.then(err =>{
+  console.log(err)
+})
+  },[])
+
+   useEffect(()=>{
+fetch("http://localhost:5000/recent")
+.then(res=>res.json())
+.then(data =>{
+  // console.log(data)
+  setRecentmovie(data)
+})
+.then(err =>{
+  console.log(err)
+})
+  },[])
 
   const {totaluser } = use(AuthContext);
  
   const data = useLoaderData()
-  console.log(data)
+  // console.log(data)
   return (
     <div>
     <div className="flex justify-center my-10">
@@ -51,9 +73,26 @@ function Home() {
         ))}
       </Swiper>
     </div>
-    
+
     <h1>Total Movies: {data.length}</h1>
     <h1>Total Users: {totaluser.length}</h1>
+
+
+<div className="text-center text-xl font-bold mt-10">Top 5 highest-rated movies</div>
+
+             <div className="grid grid-cols-3 gap-10 mt-10">
+         {ratedmovie.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
+
+      </div>
+
+
+      <div className="text-center text-xl font-bold mt-10">Latest movies</div>
+
+             <div className="grid grid-cols-3 gap-10 mt-10">
+         {recentmovie.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
+
+      </div>
+
 
     </div>
   );
