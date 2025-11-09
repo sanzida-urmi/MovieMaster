@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 
 function Login() {
-  const { signInWithGoogle,signInUser,setLoading } = use(AuthContext);
+  const { signInWithGoogle,signInUser,setLoading,setTotaluser } = use(AuthContext);
     const [see, setSee] = useState(false);
      const navigate = useNavigate();
 
@@ -18,6 +18,17 @@ function Login() {
         console.log(result.user);
         setLoading(false)
         toast.success("Login successful");
+
+
+           const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+           console.log(prevUsers)
+           const final =  prevUsers.filter(rev => rev!== result.user.email)    
+  const updateUsers = [...final, result.user.email]
+  localStorage.setItem("users",JSON.stringify(updateUsers))
+  setTotaluser(updateUsers)
+console.log(updateUsers)
+
+
 
         // navigate(location?.state || "/");
         navigate("/");
@@ -44,6 +55,19 @@ setLoading(false)
     const stored = location.state || localStorage.getItem("store") || "/";
       localStorage.removeItem("store");
       console.log(stored);
+
+
+
+        const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+           console.log(prevUsers)
+           const final =  prevUsers.filter(rev => rev!== user.email)    
+  const updateUsers = [...final, user.email]
+  localStorage.setItem("users",JSON.stringify(updateUsers))
+  setTotaluser(updateUsers)
+console.log(updateUsers)
+
+
+
       navigate(stored);
 
       toast.success("successfully login")

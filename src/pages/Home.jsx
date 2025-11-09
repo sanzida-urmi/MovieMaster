@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router'
 import MovieCard from '../components/MovieCard'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import { AuthContext } from '../context/AuthContext';
 
 
 
@@ -15,7 +16,8 @@ import "swiper/css/autoplay";
 
 function Home() {
 
-
+  const {totaluser } = use(AuthContext);
+ 
   const data = useLoaderData()
   console.log(data)
   return (
@@ -49,7 +51,9 @@ function Home() {
         ))}
       </Swiper>
     </div>
+    
     <h1>Total Movies: {data.length}</h1>
+    <h1>Total Users: {totaluser.length}</h1>
 
     </div>
   );

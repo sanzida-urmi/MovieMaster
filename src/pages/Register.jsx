@@ -1,4 +1,4 @@
-import React, { use, useContext, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import regimg from "../assets/reg.png";
 
@@ -11,7 +11,7 @@ import { updateProfile } from "firebase/auth";
 
 
 function Register() {
-  const { signInWithGoogle,setLoading,createUser,setUser,updateProfileFunction } = use(AuthContext);
+  const { signInWithGoogle,setLoading,createUser,setUser,setTotaluser,totaluser } = use(AuthContext);
   const [see, setSee] = useState(false);
     const navigate = useNavigate();
 
@@ -23,6 +23,17 @@ function Register() {
         console.log(result.user);
         setLoading(false)
         toast.success("Registration successful");
+
+
+         const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+           console.log(prevUsers)
+           const final =  prevUsers.filter(rev => rev!== result.user.email)    
+  const updateUsers = [...final, result.user.email]
+  localStorage.setItem("users",JSON.stringify(updateUsers))
+  setTotaluser(updateUsers)
+console.log(updateUsers)
+
+
 
         // navigate(location?.state || "/");
         navigate("/");
@@ -54,27 +65,6 @@ function Register() {
     }
     console.log(name, email, photo, password);
 
-    // createUser(email,password)
-    // .then((res) => {
-    //   const user = res.user;
-    //   const stored = localStorage.getItem("store") || "/";
-    //   localStorage.removeItem("store");
-    //   updateProfileFunction(user, {
-    //     displayName: name,
-    //     photoURL: photo,
-    //   })
-    //     .then(() => {
-    //       setUser({ ...user, displayName: name, photoURL: photo });
-    //       console.log(res);
-    //       setLoading(false);
-    //       navigate(stored);
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       toast.error(e.message);
-    //     });
-    // });
-
      createUser(email, password)
      .then((res) => {
       const user = res.user;
@@ -88,7 +78,19 @@ function Register() {
         .then(() => {
           setUser({ ...user, displayName: name, photoURL: photo });
           console.log(user);
-          // setLoading(false);
+
+
+
+            const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+           console.log(prevUsers)
+           const final =  prevUsers.filter(rev => rev!== user.email)    
+  const updateUsers = [...final, user.email]
+  localStorage.setItem("users",JSON.stringify(updateUsers))
+  setTotaluser(updateUsers)
+console.log(updateUsers)
+
+ 
+
           navigate(stored);
         })
         .catch((e) => {
@@ -97,11 +99,12 @@ function Register() {
           toast.error(e.message);
         });
     });
-   
-
-   
 
   };
+
+
+
+
   return (
     <div className="flex break-all justify-center items-center  min-h-screen">
     
