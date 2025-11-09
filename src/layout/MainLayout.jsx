@@ -9,7 +9,7 @@ function MainLayout() {
     <div className='my-0'>
       <div className='max-w-7xl mx-auto'>
         <Navbar></Navbar>
-      <div className='my-10'>
+      <div className='my-10 mx-15'>
         <Outlet></Outlet>
       </div>
       <Footer></Footer>
