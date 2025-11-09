@@ -7,14 +7,16 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 
 function Login() {
-  const { signInWithGoogle,signInUser } = use(AuthContext);
+  const { signInWithGoogle,signInUser,setLoading } = use(AuthContext);
     const [see, setSee] = useState(false);
      const navigate = useNavigate();
 
      const handleGoogle=()=>{
+                      setLoading(true);
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        setLoading(false)
         toast.success("Login successful");
 
         // navigate(location?.state || "/");
@@ -22,12 +24,14 @@ function Login() {
 
       })
       .catch((error) => {
+        setLoading(false)
         console.log(error);
       });
   }
 
   const  signinhandle =(e) =>{
   e.preventDefault();
+  setLoading(true);
 const email = e.target.email.value;
 const password =  e.target.password.value;
 console.log(email,password)
@@ -36,7 +40,7 @@ signInUser(email,password)
 .then(res => {
     const user = res.user;
     console.log(user);
-
+setLoading(false)
     const stored = location.state || localStorage.getItem("store") || "/";
       localStorage.removeItem("store");
       console.log(stored);
@@ -46,6 +50,7 @@ signInUser(email,password)
   })
  
   .catch(err => {
+    setLoading(false)
       const errmsg = err.message;
       toast(errmsg)
     })

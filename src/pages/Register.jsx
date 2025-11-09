@@ -11,15 +11,17 @@ import { updateProfile } from "firebase/auth";
 
 
 function Register() {
-  const { signInWithGoogle,createUser,setUser,updateProfileFunction } = use(AuthContext);
+  const { signInWithGoogle,setLoading,createUser,setUser,updateProfileFunction } = use(AuthContext);
   const [see, setSee] = useState(false);
     const navigate = useNavigate();
 
 
   const handleGoogle=()=>{
+    setLoading(true);
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        setLoading(false)
         toast.success("Registration successful");
 
         // navigate(location?.state || "/");
@@ -27,12 +29,14 @@ function Register() {
 
       })
       .catch((error) => {
+        setLoading(false)
         console.log(error);
       });
   }
 
    const submithandle = (e) => {
     e.preventDefault();
+    setLoading(true)
     const email = e.target.email.value;
     const password = e.target.password.value;
     const name = e.target.name.value;
@@ -71,8 +75,10 @@ function Register() {
     //     });
     // });
 
-     createUser(email, password).then((res) => {
+     createUser(email, password)
+     .then((res) => {
       const user = res.user;
+      setLoading(false);
       const stored = localStorage.getItem("store") || "/";
       localStorage.removeItem("store");
       updateProfile(user, {
@@ -86,6 +92,7 @@ function Register() {
           navigate(stored);
         })
         .catch((e) => {
+          setLoading(false)
           console.log(e);
           toast.error(e.message);
         });
