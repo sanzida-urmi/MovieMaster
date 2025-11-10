@@ -10,6 +10,8 @@ import AddMovies from "../pages/AddMovies";
 import MyCollection from "../pages/MyCollection";
 import Update from "../pages/Update";
 import Mywatch from "../pages/Mywatch.jsx";
+import Genre from "../pages/Genre.jsx";
+import Rating from "../pages/Rating.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ export const router = createBrowserRouter([
         {
           path: "/movies/my-collection",
           element: <MyCollection></MyCollection>
+        },
+        {
+          path: "/genre",
+          element: <Genre/>
+        },
+        {
+          path: "/rating",
+          element: <Rating/>
         }
     ]
   },
