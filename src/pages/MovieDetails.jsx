@@ -1,16 +1,60 @@
 import React, { use, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 function MovieDetails() {
     const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
+     const navigate = useNavigate();
+
   console.log(user?.email);
 const [show, setShow] = useState(false)  
 
  
+ const handleDlete = () => {
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+     
+
+    
+    fetch(`http://localhost:4000/movies/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(res => res.json())
+    .then(data=> {
+      console.log(data)
+      navigate('/movies')
+
+         Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+
+ 
+  }
+});
+ }
+
 
   useEffect(() => {
     fetch(`http://localhost:4000/movies/${id}`
@@ -78,7 +122,7 @@ useEffect(()=>{
 { show && ( 
 <div className="card-actions justify-end">
         <Link to={`/movies/update/${id}`} className="btn btn-active  btn-error">Edit</Link>
-      <button className="btn btn-error">Delete</button>
+      <button onClick={handleDlete} className="btn btn-error">Delete</button>
     </div>
 )
 }

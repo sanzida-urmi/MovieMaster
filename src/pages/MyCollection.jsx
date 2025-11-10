@@ -4,8 +4,9 @@ import MovieCard from '../components/MovieCard';
 import MycollectionList from './MycollectionList';
 
 function MyCollection() {
-      const {user,setLoading} = use(AuthContext);
+      const {user,setLoading,refetch,setRefecth} = use(AuthContext);
   const [collection, setCollection] = useState([]);
+  
 
   console.log(user);
 
@@ -28,10 +29,11 @@ function MyCollection() {
       .then((data) => {
         // console.log(data)
         setCollection(data);
+        
         // console.log(data[0]);
         setLoading(false);
       });
-  }, [user]);
+  }, [user,refetch]);
 
 console.log(collection);
   return (

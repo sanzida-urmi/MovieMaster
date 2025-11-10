@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 function Update() {
      const { id } = useParams();
@@ -43,24 +44,26 @@ function Update() {
             country: e.target.country.value,
             plotSummary: e.target.plotSummary.value,
             posterUrl: e.target.posterUrl.value,
+            addedBy: e.target.addedBy.value,
+            addedAt: new Date().toISOString(),
           }
           console.log(formData);
       
-        //   fetch('http://localhost:4000/movies', {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(formData)
-        //   })
-        //   .then(res => res.json())
-        //   .then(data=> {
-        //     console.log(data)
-        //     toast.success('successfully added');
-        //   })
-        //   .catch(err => {
-        //     console.log(err)
-        //   })
+          fetch(`http://localhost:4000/movies/update/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(res => res.json())
+          .then(data=> {
+            console.log(data)
+            toast.success('successfully added');
+          })
+          .catch(err => {
+            console.log(err)
+          })
          
       
         }
