@@ -1,55 +1,40 @@
-import React, { use } from 'react'
-import { AuthContext } from '../context/AuthContext'
-import { toast } from 'react-toastify';
+import React, { use, useEffect, useState } from 'react'
+import { AuthContext } from '../context/AuthContext';
+import { useParams } from 'react-router';
 
-function AddMovies() {
-    const {user} = use(AuthContext);
-    console.log(user);
+function Update() {
+     const { id } = useParams();
+  const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { user } = use(AuthContext);
+
+     useEffect(() => {
+        fetch(`http://localhost:4000/movies/update/${id}`
+            
+    //         , {
+    //       headers: {
+    //         authorization: `Bearer ${user.accessToken}`,
+    //       },
+    // }
+    
+    )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.result);
+            setMovie(data.result);
+            console.log(" Api called!")
+            setLoading(false);
+          });
+      }, [user, id]);
 
 
-    const handleSubmit = (e) => {
-    e.preventDefault()
+       
 
-    const formData = {
-      title: e.target.title.value,
-      genre: e.target.genre.value,
-      releaseYear: e.target.releaseYear.value,
-      director: e.target.director.value,
-      cast: e.target.cast.value,
-      duration: e.target.duration.value,
-      rating: e.target.rating.value,
-      language: e.target.language.value,
-      country: e.target.country.value,
-      plotSummary: e.target.plotSummary.value,
-      posterUrl: e.target.posterUrl.value,
-      addedAt: new Date().toISOString(),
-      addedBy: user.email
-    }
-    console.log(formData);
-
-    fetch('http://localhost:4000/movies', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data=> {
-      console.log(data)
-      toast.success('successfully added');
-    })
-    .catch(err => {
-      console.log(err)
-    })
-   
-
-  }
   return (
     <div>
       <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Update Movies</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* title Field */}
           <div>
@@ -57,9 +42,8 @@ function AddMovies() {
             <input
               type="text"
               name="title"
-              required
+              defaultValue={movie.title}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter title"
             />
           </div>
 
@@ -69,9 +53,8 @@ function AddMovies() {
             <input
               type="text"
               name="genre"
-              required
+              defaultValue={movie.genre}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter genre"
             />
           </div>
           {/* releaseYear Field */}
@@ -80,9 +63,8 @@ function AddMovies() {
             <input
               type="text"
               name="releaseYear"
-              required
+              defaultValue={movie.releaseYear}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter releaseYear"
             />
           </div>
           {/* director Field */}
@@ -91,9 +73,8 @@ function AddMovies() {
             <input
               type="text"
               name="director"
-              required
+                            defaultValue={movie.director}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter director"
             />
           </div>
           {/* cast Field */}
@@ -102,9 +83,8 @@ function AddMovies() {
             <input
               type="text"
               name="cast"
-              required
+               defaultValue={movie.cast}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter cast"
             />
           </div>
           {/* rating Field */}
@@ -113,9 +93,8 @@ function AddMovies() {
             <input
               type="text"
               name="rating"
-              required
+              defaultValue={movie.rating}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter rating"
             />
           </div>
           {/* duration Field */}
@@ -124,9 +103,8 @@ function AddMovies() {
             <input
               type="text"
               name="duration"
-              required
+              defaultValue={movie.duration}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter duration"
             />
           </div>
           {/* language Field */}
@@ -135,9 +113,8 @@ function AddMovies() {
             <input
               type="text"
               name="language"
-              required
+              defaultValue={movie.language}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter language"
             />
           </div>
           {/* country Field */}
@@ -146,9 +123,8 @@ function AddMovies() {
             <input
               type="text"
               name="country"
-              required
+              defaultValue={movie.country}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter country"
             />
           </div>
           
@@ -159,10 +135,9 @@ function AddMovies() {
             <label className="label font-medium">PlotSummary</label>
             <textarea
               name="plotSummary"
-              required
+              defaultValue={movie.plotSummary}
               rows="3"
              className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[250px]"
-              placeholder="Enter plotSummary"
             ></textarea>
           </div>
 
@@ -172,14 +147,13 @@ function AddMovies() {
             <input
               type="url"
               name="posterUrl"
-              required
+              defaultValue={movie.posterUrl}
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="https://example.com/image.jpg"
             />
           </div>
 
            {/* addedBy Field */}
-          {/* <div>
+          <div>
             <label className="label font-medium">AddedBy</label>
             <input
               type="text"
@@ -189,7 +163,7 @@ function AddMovies() {
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               
             />
-          </div> */}
+          </div>
 
 
 
@@ -198,7 +172,7 @@ function AddMovies() {
             type="submit"
             className="btn w-full text-white mt-6 rounded-full btn-error"
           >
-            Add Movie
+            Update Movie
           </button>
         </form>
       </div>
@@ -207,4 +181,4 @@ function AddMovies() {
   )
 }
 
-export default AddMovies
+export default Update

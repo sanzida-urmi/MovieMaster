@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 
 function MovieDetails() {
@@ -77,7 +77,7 @@ useEffect(()=>{
 
 { show && ( 
 <div className="card-actions justify-end">
-        <button className="btn btn-error">Edit</button>
+        <Link to={`/movies/update/${id}`} className="btn btn-active  btn-error">Edit</Link>
       <button className="btn btn-error">Delete</button>
     </div>
 )

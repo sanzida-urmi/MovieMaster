@@ -7,6 +7,8 @@ import AllMovies from "../pages/AllMovies";
 import Myprofile from "../pages/Myprofile";
 import MovieDetails from "../pages/MovieDetails";
 import AddMovies from "../pages/AddMovies";
+import MyCollection from "../pages/MyCollection";
+import Update from "../pages/Update";
 
 export const router = createBrowserRouter([
   {
@@ -40,8 +42,16 @@ export const router = createBrowserRouter([
           element: <MovieDetails></MovieDetails>
         },
         {
+          path: "/movies/update/:id",
+          element: <Update></Update>
+        },
+        {
           path: "/movies/add",
           element: <AddMovies></AddMovies>
+        },
+        {
+          path: "/movies/my-collection",
+          element: <MyCollection></MyCollection>
         }
     ]
   },
