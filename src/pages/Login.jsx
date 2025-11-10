@@ -20,13 +20,33 @@ function Login() {
         toast.success("Login successful");
 
 
-           const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-           console.log(prevUsers)
-           const final =  prevUsers.filter(rev => rev!== result.user.email)    
-  const updateUsers = [...final, result.user.email]
-  localStorage.setItem("users",JSON.stringify(updateUsers))
-  setTotaluser(updateUsers)
-console.log(updateUsers)
+         const newUser ={
+              name: result.user.displayName,
+              email: result.user.email,
+              image: result.user.photoURL
+            }
+
+            // create user in database 
+            fetch('http://localhost:4000/users',{
+              method: 'POST',
+              headers: {
+                'content-type' : 'application/json'
+              },
+              body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log('data after user save', data)
+            })
+
+
+//            const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+//            console.log(prevUsers)
+//            const final =  prevUsers.filter(rev => rev!== result.user.email)    
+//   const updateUsers = [...final, result.user.email]
+//   localStorage.setItem("users",JSON.stringify(updateUsers))
+//   setTotaluser(updateUsers)
+// console.log(updateUsers)
 
 
 
@@ -58,13 +78,34 @@ setLoading(false)
 
 
 
-        const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-           console.log(prevUsers)
-           const final =  prevUsers.filter(rev => rev!== user.email)    
-  const updateUsers = [...final, user.email]
-  localStorage.setItem("users",JSON.stringify(updateUsers))
-  setTotaluser(updateUsers)
-console.log(updateUsers)
+      const newUser ={
+              name: user.displayName,
+              email: user.email,
+              image: user.photoURL
+            }
+
+            // create user in database 
+            fetch('http://localhost:4000/users',{
+              method: 'POST',
+              headers: {
+                'content-type' : 'application/json'
+              },
+              body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log('data after user save', data)
+            })
+
+            
+
+//         const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+//            console.log(prevUsers)
+//            const final =  prevUsers.filter(rev => rev!== user.email)    
+//   const updateUsers = [...final, user.email]
+//   localStorage.setItem("users",JSON.stringify(updateUsers))
+//   setTotaluser(updateUsers)
+// console.log(updateUsers)
 
 
 

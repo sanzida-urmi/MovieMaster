@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 function MovieCard({movie}) {
     const {posterUrl,genre,rating,title,_id,releaseYear} = movie
@@ -18,7 +19,7 @@ function MovieCard({movie}) {
     
     
     <div className="card-actions justify-end">
-      <button className="btn btn-active  btn-error">Details</button>
+      <Link to={`/movies/${_id}`} className="btn btn-active  btn-error">Details</Link>
 
     </div>
   </div>

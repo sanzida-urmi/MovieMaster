@@ -21,28 +21,55 @@ function Register() {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        setLoading(false)
+
+        
+            const newUser ={
+              name: result.user.displayName,
+              email: result.user.email,
+              image: result.user.photoURL
+            }
+
+            // create user in database 
+            fetch('http://localhost:4000/users',{
+              method: 'POST',
+              headers: {
+                'content-type' : 'application/json'
+              },
+              body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log('data after user save', data)
+            })
+             setLoading(false)
         toast.success("Registration successful");
+         navigate("/");
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+       
 
 
-         const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-           console.log(prevUsers)
-           const final =  prevUsers.filter(rev => rev!== result.user.email)    
-  const updateUsers = [...final, result.user.email]
-  localStorage.setItem("users",JSON.stringify(updateUsers))
-  setTotaluser(updateUsers)
-console.log(updateUsers)
+//          const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+//            console.log(prevUsers)
+//            const final =  prevUsers.filter(rev => rev!== result.user.email)    
+//   const updateUsers = [...final, result.user.email]
+//   localStorage.setItem("users",JSON.stringify(updateUsers))
+//   setTotaluser(updateUsers)
+// console.log(updateUsers)
 
 
 
         // navigate(location?.state || "/");
-        navigate("/");
+       
 
-      })
-      .catch((error) => {
-        setLoading(false)
-        console.log(error);
-      });
+      // })
+      // .catch((error) => {
+      //   setLoading(false)
+      //   console.log(error);
+      // });
   }
 
    const submithandle = (e) => {
@@ -80,14 +107,34 @@ console.log(updateUsers)
           console.log(user);
 
 
+           const newUser ={
+              name: user.displayName,
+              email: user.email,
+              image: user.photoURL
+            }
 
-            const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-           console.log(prevUsers)
-           const final =  prevUsers.filter(rev => rev!== user.email)    
-  const updateUsers = [...final, user.email]
-  localStorage.setItem("users",JSON.stringify(updateUsers))
-  setTotaluser(updateUsers)
-console.log(updateUsers)
+            // create user in database 
+            fetch('http://localhost:4000/users',{
+              method: 'POST',
+              headers: {
+                'content-type' : 'application/json'
+              },
+              body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log('data after user save', data)
+            })
+
+
+
+//             const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
+//            console.log(prevUsers)
+//            const final =  prevUsers.filter(rev => rev!== user.email)    
+//   const updateUsers = [...final, user.email]
+//   localStorage.setItem("users",JSON.stringify(updateUsers))
+//   setTotaluser(updateUsers)
+// console.log(updateUsers)
 
  
 

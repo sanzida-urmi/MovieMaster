@@ -17,9 +17,16 @@ import { AuthContext } from '../context/AuthContext';
 function Home() {
   const [ratedmovie, setRatedmovie] = useState([])
   const [recentmovie, setRecentmovie] = useState([])
+  const [totaluser,setTotaluser]= useState(0);
 
   useEffect(()=>{
-fetch("http://localhost:5000/rate")
+    fetch("http://localhost:4000/users/count")
+    .then(res => res.json())
+    .then(data => setTotaluser(data.totalUsers))
+  },[])
+
+  useEffect(()=>{
+fetch("http://localhost:4000/rate")
 .then(res=>res.json())
 .then(data =>{
   // console.log(data)
@@ -31,7 +38,7 @@ fetch("http://localhost:5000/rate")
   },[])
 
    useEffect(()=>{
-fetch("http://localhost:5000/recent")
+fetch("http://localhost:4000/recent")
 .then(res=>res.json())
 .then(data =>{
   // console.log(data)
@@ -42,7 +49,7 @@ fetch("http://localhost:5000/recent")
 })
   },[])
 
-  const {totaluser } = use(AuthContext);
+  // const {totaluser } = use(AuthContext);
  
   const data = useLoaderData()
   // console.log(data)
@@ -79,7 +86,7 @@ fetch("http://localhost:5000/recent")
     </div>
 
     <h1>Total Movies: {data.length}</h1>
-    <h1>Total Users: {totaluser.length}</h1>
+    <h1>Total Users: {totaluser}</h1>
 
 
 <div className="text-center text-xl font-bold mt-10">Top 5 highest-rated movies</div>
