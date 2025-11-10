@@ -9,6 +9,7 @@ import MovieDetails from "../pages/MovieDetails";
 import AddMovies from "../pages/AddMovies";
 import MyCollection from "../pages/MyCollection";
 import Update from "../pages/Update";
+import Mywatch from "../pages/Mywatch.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
         {
           path: "/movies/add",
           element: <AddMovies></AddMovies>
+        },
+        {
+          path: "/watchlist",
+          element: <Mywatch></Mywatch>>
         },
         {
           path: "/movies/my-collection",

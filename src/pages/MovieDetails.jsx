@@ -119,8 +119,11 @@ useEffect(()=>{
     <p>AddedAt: {movie.addedAt}</p>
     <p>{movie.plotSummary}</p>
 
+    <button className="btn btn-error my-5">Add to watchlist</button>
+
 { show && ( 
 <div className="card-actions justify-end">
+  
         <Link to={`/movies/update/${id}`} className="btn btn-active  btn-error">Edit</Link>
       <button onClick={handleDlete} className="btn btn-error">Delete</button>
     </div>
