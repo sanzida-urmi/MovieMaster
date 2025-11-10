@@ -28,7 +28,42 @@ function Update() {
       }, [user, id]);
 
 
-       
+        const handleSubmit = (e) => {
+          e.preventDefault()
+      
+          const formData = {
+            title: e.target.title.value,
+            genre: e.target.genre.value,
+            releaseYear: e.target.releaseYear.value,
+            director: e.target.director.value,
+            cast: e.target.cast.value,
+            duration: e.target.duration.value,
+            rating: e.target.rating.value,
+            language: e.target.language.value,
+            country: e.target.country.value,
+            plotSummary: e.target.plotSummary.value,
+            posterUrl: e.target.posterUrl.value,
+          }
+          console.log(formData);
+      
+        //   fetch('http://localhost:4000/movies', {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(formData)
+        //   })
+        //   .then(res => res.json())
+        //   .then(data=> {
+        //     console.log(data)
+        //     toast.success('successfully added');
+        //   })
+        //   .catch(err => {
+        //     console.log(err)
+        //   })
+         
+      
+        }
 
   return (
     <div>
