@@ -35,6 +35,7 @@ function Navbar() {
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/myprofile">My Profile</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/my-collection">My Collections</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/add" >Add Movie</NavLink></li>
+        <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/watchlist" >My Watchlist</NavLink></li>
         </>
      }
      </>

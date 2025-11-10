@@ -7,6 +7,7 @@ function AllMovies() {
 
   return (
     <div>
+      
         <div className="text-center text-xl font-bold mt-10">All Movies</div>
 
              <div className="grid grid-cols-3 gap-10 mt-10">

@@ -52,7 +52,8 @@ export const router = createBrowserRouter([
         },
         {
           path: "/watchlist",
-          element: <Mywatch></Mywatch>>
+          element: <Mywatch></Mywatch>,
+          loader: () => fetch('http://localhost:4000/watch')
         },
         {
           path: "/movies/my-collection",

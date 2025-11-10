@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 function MovieDetails() {
     const { id } = useParams();
@@ -95,6 +96,34 @@ useEffect(()=>{
   if (loading) {
     return <div> Loading...</div>;
   }
+
+ const handlewatch = () => {
+    const watchdata = {
+     title: movie.title,
+     genre: movie.genre,
+     posterUrl: movie.posterUrl,
+     addedBy: user?.email,
+    };
+  console.log(watchdata)
+
+     fetch('http://localhost:4000/watch', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(watchdata)
+        })
+        .then(res => res.json())
+        .then(data=> {
+          console.log(data)
+          toast.success('successfully added');
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
+
+  };
   return (
     <div>
       <div className="card bg-base-100 w-full gap-20 shadow-sm flex flex-row justify-center items-center mx-auto">
@@ -119,7 +148,7 @@ useEffect(()=>{
     <p>AddedAt: {movie.addedAt}</p>
     <p>{movie.plotSummary}</p>
 
-    <button className="btn btn-error my-5">Add to watchlist</button>
+    <button onClick={handlewatch} className="btn btn-error my-5">Add to watchlist</button>
 
 { show && ( 
 <div className="card-actions justify-end">
