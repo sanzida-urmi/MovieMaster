@@ -21,6 +21,7 @@ function Register() {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        setUser(result.user)
 
         
             const newUser ={

@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 
 function Login() {
-  const { signInWithGoogle,signInUser,setLoading,setTotaluser } = use(AuthContext);
+  const { signInWithGoogle,signInUser,setLoading,setUser } = use(AuthContext);
     const [see, setSee] = useState(false);
      const navigate = useNavigate();
 
@@ -16,6 +16,7 @@ function Login() {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        setUser(result.user)
         setLoading(false)
         toast.success("Login successful");
 
@@ -71,6 +72,7 @@ signInUser(email,password)
 .then(res => {
     const user = res.user;
     console.log(user);
+    setUser(user);
 setLoading(false)
     const stored = location.state || localStorage.getItem("store") || "/";
       localStorage.removeItem("store");

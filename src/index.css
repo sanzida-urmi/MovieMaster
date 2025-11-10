@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-.navv .active {
+ .active {
   color: crimson;
   font-weight: bold;
   border: 1px solid #CAC8C8FF;

@@ -7,8 +7,10 @@ function MovieDetails() {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-  console.log(user);
+  console.log(user?.email);
+const [show, setShow] = useState(false)  
 
+ 
 
   useEffect(() => {
     fetch(`http://localhost:4000/movies/${id}`
@@ -35,7 +37,16 @@ useEffect(()=>{
     console.log("updated movie", movie);
 },[movie])
 
+console.log(user?.email, movie.addedBy);
 
+
+useEffect(()=>{
+  if(user?.email === movie.addedBy){
+    setShow(true);
+  }else{
+    setShow(false)
+  }
+},[user,movie])
 
   if (loading) {
     return <div> Loading...</div>;
@@ -62,12 +73,18 @@ useEffect(()=>{
     <p>Language: {movie.language}</p>
     <p>AddedBy: {movie.addedBy}</p>
     <p>AddedAt: {movie.addedAt}</p>
-
     <p>{movie.plotSummary}</p>
-    <div className="card-actions justify-end">
+
+{ show && ( 
+<div className="card-actions justify-end">
         <button className="btn btn-error">Edit</button>
       <button className="btn btn-error">Delete</button>
     </div>
+)
+}
+    
+
+
   </div>
 </div>
     </div>
