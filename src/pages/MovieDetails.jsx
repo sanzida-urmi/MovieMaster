@@ -1,15 +1,18 @@
 import React, { use, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams, useLocation } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { ClimbingBoxLoader } from 'react-spinners';
 
 function MovieDetails() {
     const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-     const navigate = useNavigate();
+    //  const navigate = useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();
 
   console.log(user?.email);
 const [show, setShow] = useState(false)  
@@ -39,6 +42,7 @@ const [show, setShow] = useState(false)
     .then(data=> {
       console.log(data)
       navigate('/movies')
+       toast.success('successfully deleted');
 
          Swal.fire({
       title: "Deleted!",
@@ -48,6 +52,7 @@ const [show, setShow] = useState(false)
     })
     .catch(err => {
       console.log(err)
+       toast.error('could not delete');
     })
 
 
@@ -58,6 +63,7 @@ const [show, setShow] = useState(false)
 
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:4000/movies/${id}`
         
 //         , {
@@ -73,7 +79,12 @@ const [show, setShow] = useState(false)
         setMovie(data.result);
         // console.log(" Api called!")
         setLoading(false);
-      });
+         toast.success("Show details");
+      })
+      .catch(err =>{
+                       console.log(err);
+                       toast.error("could not show details")
+                     });
   }, [user, id]);
 
   
@@ -93,12 +104,17 @@ useEffect(()=>{
   }
 },[user,movie])
 
-  if (loading) {
-    return <div> Loading...</div>;
+  if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
   }
 
  const handlewatch = () => {
-    const watchdata = {
+  if(user)
+   { const watchdata = {
      title: movie.title,
      genre: movie.genre,
      posterUrl: movie.posterUrl,
@@ -116,14 +132,21 @@ useEffect(()=>{
         .then(res => res.json())
         .then(data=> {
           console.log(data)
-          toast.success('successfully added');
+          toast.success('successfully added to watchlist');
         })
         .catch(err => {
           console.log(err)
+           toast.error('could not add to watchlist');
         })
-
-
+      }
+      else{
+        // navigate('/login')
+// navigate("/login", { state: { from: location.pathname } });
+navigate("/login",{state:{from:location.pathname}});
+      }
   };
+
+
   return (
     <div>
       <div className="card bg-base-100 w-full gap-20 shadow-sm flex flex-row justify-center items-center mx-auto">

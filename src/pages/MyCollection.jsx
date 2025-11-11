@@ -2,15 +2,19 @@ import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import MovieCard from '../components/MovieCard';
 import MycollectionList from './MycollectionList';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 function MyCollection() {
-      const {user,setLoading,refetch,setRefecth} = use(AuthContext);
+      const {user,refetch,setRefecth} = use(AuthContext);
   const [collection, setCollection] = useState([]);
+  const [loading, setLoading] = useState(false);
   
 
   console.log(user);
 
      useEffect(() => {
+      setLoading(true);
 
          if(!user?.email){
             return
@@ -32,10 +36,25 @@ function MyCollection() {
         
         // console.log(data[0]);
         setLoading(false);
-      });
+         toast.success("Show collection");
+      })
+      .catch(err =>{
+                       console.log(err);
+                       toast.error("could not show collection")
+                     });
   }, [user,refetch]);
 
 console.log(collection);
+
+ if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
+
+
   return (
     <div>
 

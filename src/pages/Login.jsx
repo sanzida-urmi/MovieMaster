@@ -1,5 +1,5 @@
 import React, { useState,use } from "react";
-import { Link,useNavigate } from "react-router";
+import { Link,useNavigate, useLocation } from "react-router";
 import loginImg from "../assets/login.png";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
@@ -9,7 +9,11 @@ import { IoEyeOff } from "react-icons/io5";
 function Login() {
   const { signInWithGoogle,signInUser,setLoading,setUser } = use(AuthContext);
     const [see, setSee] = useState(false);
-     const navigate = useNavigate();
+    //  const navigate = useNavigate();
+    //  const location = useLocation();
+        const navigate = useNavigate();
+        const location = useLocation();
+        console.log(location.state?.from);
 
      const handleGoogle=()=>{
                       setLoading(true);
@@ -41,18 +45,11 @@ function Login() {
             })
 
 
-//            const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-//            console.log(prevUsers)
-//            const final =  prevUsers.filter(rev => rev!== result.user.email)    
-//   const updateUsers = [...final, result.user.email]
-//   localStorage.setItem("users",JSON.stringify(updateUsers))
-//   setTotaluser(updateUsers)
-// console.log(updateUsers)
-
-
-
         // navigate(location?.state || "/");
-        navigate("/");
+        // navigate("/");
+// navigate(location.state.from || "/")
+navigate(location.state?.from || "/");
+
 
       })
       .catch((error) => {
@@ -74,9 +71,9 @@ signInUser(email,password)
     console.log(user);
     setUser(user);
 setLoading(false)
-    const stored = location.state || localStorage.getItem("store") || "/";
-      localStorage.removeItem("store");
-      console.log(stored);
+    // const stored = location.state || localStorage.getItem("store") || "/";
+    //   localStorage.removeItem("store");
+    //   console.log(stored);
 
 
 
@@ -111,7 +108,8 @@ setLoading(false)
 
 
 
-      navigate(stored);
+      // navigate(stored);
+      navigate(location.state?.from || "/");
 
       toast.success("successfully login")
   })
@@ -204,7 +202,7 @@ setLoading(false)
             </button>
 
             <p>First time in website? please {" "}
-              <Link to="/register">
+              <Link to="/register"  state={{from: location.state?.from || "/"}} >
               <span className="text-blue-600">Register</span></Link>
             </p>
             

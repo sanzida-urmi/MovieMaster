@@ -1,15 +1,19 @@
 import React, { useRef, useState } from 'react'
 import MovieCard from '../components/MovieCard';
 import { toast } from 'react-toastify';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 function Rating() {
  
   const minref = useRef();
   const maxref= useRef();
   const [ary, setAry] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
   
   const submit= async(e)=>{
     e.preventDefault();
+    setLoading(true);
 
     const min = parseFloat(minref.current.value);
     const max = parseFloat(maxref.current.value);
@@ -20,11 +24,35 @@ function Rating() {
       return;
     }
 
-       
-    const res = await fetch(`http://localhost:4000/rating?min=${min}&max=${max}`);
-    const data = await res.json();
-    setAry(data);
+       setLoading(true);
+    // const res = await fetch(`http://localhost:4000/rating?min=${min}&max=${max}`);
+    // const data = await res.json();
+    // setAry(data);
+    // setLoading(false);
+
+     fetch(`http://localhost:4000/rating?min=${min}&max=${max}`)
+        .then(res=>res.json())
+        .then(data =>{
+             console.log(data)
+            setAry(data);
+    setLoading(false);
+            toast.success("Show movie");
+            })
+            .catch(err =>{
+                     console.log(err);
+                     toast.error("could not show movie")
+                   })
   };
+
+  
+ if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
+
   return (
     <div>
      <div>

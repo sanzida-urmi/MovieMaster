@@ -1,19 +1,41 @@
-import React,{useState} from 'react'
+import React,{use, useEffect, useState} from 'react'
 import { Link, NavLink, useLoaderData } from 'react-router'
 import MovieCard from '../components/MovieCard'
+import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 
 function AllMovies() {
-      const data = useLoaderData()
-  //      const [minRating, setMinRating] = useState(0);
-  // const [maxRating, setMaxRating] = useState(10);
-  // const [movies, setMovies] = useState([]);
+      // const data = useLoaderData()
+       const {loading,setLoading} = use(AuthContext);
+         const [data, setData] = useState([])
+       
 
-  //   const applyFilters = () => {
-  //   fetch(`http://localhost:4000/movies?minRating=${minRating}&maxRating=${maxRating}`)
-  //     .then(res => res.json())
-  //     .then(data => setMovies(data));
-  // };
+
+        useEffect(()=>{
+           setLoading(true);
+       fetch("http://localhost:4000/movies")
+       .then(res=>res.json())
+       .then(data =>{
+         console.log(data)
+         setData(data)
+         setLoading(false);
+         toast.success("Show all movie");
+       })
+       .catch(err =>{
+         console.log(err);
+         toast.error("could not show all movie")
+       })
+         },[])
+
+          if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
 
   return (
 <div>

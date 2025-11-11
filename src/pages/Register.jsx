@@ -1,5 +1,5 @@
 import React, { use, useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import regimg from "../assets/reg.png";
 
 
@@ -13,7 +13,13 @@ import { updateProfile } from "firebase/auth";
 function Register() {
   const { signInWithGoogle,setLoading,createUser,setUser,setTotaluser,totaluser } = use(AuthContext);
   const [see, setSee] = useState(false);
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // console.log(location.state?.from)
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location.state?.from)
+
 
 
   const handleGoogle=()=>{
@@ -44,24 +50,17 @@ function Register() {
             })
              setLoading(false)
         toast.success("Registration successful");
-         navigate("/");
+        //  navigate("/");
+        
+        // navigate(location.state?.from || "/");
+        navigate(location.state?.from ||"/");
+
         })
         .catch(err => {
             console.log(err);
         })
 
        
-
-
-//          const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-//            console.log(prevUsers)
-//            const final =  prevUsers.filter(rev => rev!== result.user.email)    
-//   const updateUsers = [...final, result.user.email]
-//   localStorage.setItem("users",JSON.stringify(updateUsers))
-//   setTotaluser(updateUsers)
-// console.log(updateUsers)
-
-
 
         // navigate(location?.state || "/");
        
@@ -97,8 +96,10 @@ function Register() {
      .then((res) => {
       const user = res.user;
       setLoading(false);
-      const stored = localStorage.getItem("store") || "/";
-      localStorage.removeItem("store");
+
+      // const stored = localStorage.getItem("store") || "/";
+      // localStorage.removeItem("store");
+
       updateProfile(user, {
         displayName: name,
         photoURL: photo,
@@ -137,9 +138,10 @@ function Register() {
 //   setTotaluser(updateUsers)
 // console.log(updateUsers)
 
- 
+ navigate(location.state?.from ||"/");
+ toast.success("successfully login")
 
-          navigate(stored);
+          // navigate(stored);
         })
         .catch((e) => {
           setLoading(false)

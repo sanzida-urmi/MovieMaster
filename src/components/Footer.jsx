@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 function Footer() {
   return (
-   <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10 rounded-2xl">
+   <footer className="footer sm:footer-horizontal mt-10 bg-base-300 text-base-content p-10 rounded-2xl">
     
   <nav>
     <h6 className="footer-title">Services</h6>
@@ -51,7 +51,7 @@ function Footer() {
       </a>
         </div>
         <p>
-        <Link to="https://www.youtube.com" className='border-b-1 border-b-gray-400'>YouTube</Link>
+        <Link to="https://www.youtube.com/" className='border-b-1 border-b-gray-400'>YouTube</Link>
       </p>
       </div>
 
@@ -70,7 +70,7 @@ function Footer() {
       </a>
         </div>
          <p>
-        <Link to="https://www.youtube.com" className='border-b-1 border-b-gray-400'>Facebook</Link>
+        <Link to="https://www.facebook.com/" className='border-b-1 border-b-gray-400'>Facebook</Link>
       </p>
       </div>
 

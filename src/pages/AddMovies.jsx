@@ -1,23 +1,27 @@
-import React, { use } from 'react'
+import React, { use, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { toast } from 'react-toastify';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { number } from 'framer-motion';
 
 function AddMovies() {
     const {user} = use(AuthContext);
+    const [loading, setLoading] = useState(false);
     console.log(user);
 
 
     const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setLoading(true);
 
     const formData = {
       title: e.target.title.value,
       genre: e.target.genre.value,
-      releaseYear: e.target.releaseYear.value,
+      releaseYear: Number(e.target.releaseYear.value),
       director: e.target.director.value,
       cast: e.target.cast.value,
-      duration: e.target.duration.value,
-      rating: e.target.rating.value,
+      duration: Number(e.target.duration.value),
+      rating: Number(e.target.rating.value),
       language: e.target.language.value,
       country: e.target.country.value,
       plotSummary: e.target.plotSummary.value,
@@ -37,19 +41,29 @@ function AddMovies() {
     .then(res => res.json())
     .then(data=> {
       console.log(data)
+      setLoading(false);
       toast.success('successfully added');
     })
     .catch(err => {
       console.log(err)
+      toast.error('cound not add');
     })
    
 
   }
+
+  if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
   return (
     <div>
-      <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
+      <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Add New Movie</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* title Field */}
           <div>
@@ -78,7 +92,7 @@ function AddMovies() {
           <div>
             <label className="label font-medium">ReleaseYear</label>
             <input
-              type="text"
+              type="number"
               name="releaseYear"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
@@ -111,8 +125,9 @@ function AddMovies() {
           <div>
             <label className="label font-medium">Rating</label>
             <input
-              type="text"
+              type="number"
               name="rating"
+              step="any"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Enter rating"
@@ -122,7 +137,8 @@ function AddMovies() {
           <div>
             <label className="label font-medium">Duration</label>
             <input
-              type="text"
+              type="number"
+              step="any"
               name="duration"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
@@ -178,27 +194,12 @@ function AddMovies() {
             />
           </div>
 
-           {/* addedBy Field */}
-          {/* <div>
-            <label className="label font-medium">AddedBy</label>
-            <input
-              type="text"
-              name="addedBy"
-              readOnly
-              value={user?.email}
-              className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              
-            />
-          </div> */}
-
-
-
-          {/* Submit Button */}
+                  {/* Submit Button */}
           <button
             type="submit"
             className="btn w-full text-white mt-6 rounded-full btn-error"
           >
-            Add Movie
+            Submit Movie
           </button>
         </form>
       </div>

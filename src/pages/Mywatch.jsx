@@ -1,11 +1,15 @@
 import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import MyList from './MyList';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 function Mywatch() {
-     const {user,setLoading,refetch,setRefecth} = use(AuthContext);
+     const {user,refetch,setRefecth} = use(AuthContext);
+      const [loading, setLoading] = useState(true);
       const [collection, setCollection] = useState([]);
     useEffect(() => {
+      setLoading(true);
              if(!user?.email){
                 return
              }
@@ -26,8 +30,22 @@ function Mywatch() {
             
             // console.log(data[0]);
             setLoading(false);
-          });
+            toast.success('show watchlist');
+          })
+           .catch(err => {
+                console.log(err)
+                toast.error('cound not show watchlist');
+              })
       }, [user]);
+
+       if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
+
   return (
     <div>
       

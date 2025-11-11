@@ -13,46 +13,102 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { AuthContext } from '../context/AuthContext';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 function Home() {
   const [ratedmovie, setRatedmovie] = useState([])
   const [recentmovie, setRecentmovie] = useState([])
+  const [data, setData] = useState([])
   const [totaluser,setTotaluser]= useState(0);
+    const [loading, setLoading] = useState(false);
+  
+
 
   useEffect(()=>{
+    setLoading(true);
     fetch("http://localhost:4000/users/count")
     .then(res => res.json())
-    .then(data => setTotaluser(data.totalUsers))
+    .then(data => {
+      console.log(data)
+      setTotaluser(data.totalUsers)
+      toast.success("successfully count user");
+      setLoading(false)
+    })
+    .catch(err =>{
+  console.log(err)
+  toast.error("could not count user")
+})
   },[])
 
+
+
   useEffect(()=>{
+    setLoading(true);
 fetch("http://localhost:4000/rate")
 .then(res=>res.json())
 .then(data =>{
-  // console.log(data)
+  console.log(data)
+  setLoading(false);
   setRatedmovie(data)
+  toast.success("Show top movie");
+  
 })
-.then(err =>{
-  console.log(err)
+.catch(err =>{
+  console.log(err);
+  toast.error("could not show top movie")
 })
   },[])
 
+
+
+
    useEffect(()=>{
+    setLoading(true);
 fetch("http://localhost:4000/recent")
 .then(res=>res.json())
 .then(data =>{
-  // console.log(data)
+  console.log(data)
   setRecentmovie(data)
+  setLoading(false);
+  toast.success("Show latest movie");
 })
-.then(err =>{
-  console.log(err)
+.catch(err =>{
+  console.log(err);
+  toast.error("could not show latest movie")
 })
   },[])
 
-  // const {totaluser } = use(AuthContext);
- 
-  const data = useLoaderData()
-  // console.log(data)
+
+
+  useEffect(()=>{
+    setLoading(true);
+fetch("http://localhost:4000/movies")
+.then(res=>res.json())
+.then(data =>{
+  console.log(data)
+  setData(data)
+  setLoading(false);
+  toast.success("Show slider");
+})
+.catch(err =>{
+  console.log(err);
+  toast.error("could not show slider")
+})
+  },[])
+
+
+  // const data = useLoaderData()
+  console.log(data)
+
+   if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
+
   return (
     <div>
     <div className="flex justify-center my-10">
@@ -104,7 +160,7 @@ fetch("http://localhost:4000/recent")
 
       </div>
 
-<div className="text-center text-xl font-bold my-10">Latest movies</div>
+<div className="text-center text-xl font-bold my-10">Genres</div>
 <div className='flex gap-30 mx-auto justify-center items-center'>
 
   <div>

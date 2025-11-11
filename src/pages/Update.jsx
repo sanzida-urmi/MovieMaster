@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 function Update() {
      const { id } = useParams();
@@ -10,6 +11,7 @@ function Update() {
   const { user } = use(AuthContext);
 
      useEffect(() => {
+      setLoading(true);
         fetch(`http://localhost:4000/movies/update/${id}`
             
     //         , {
@@ -25,12 +27,18 @@ function Update() {
             setMovie(data.result);
             console.log(" Api called!")
             setLoading(false);
+            toast.success("update page");
+          })
+          .catch(err =>{
+            console.log(err)
+            toast.error("could not fetch update page")
           });
       }, [user, id]);
 
 
         const handleSubmit = (e) => {
-          e.preventDefault()
+          e.preventDefault();
+          setLoading(true);
       
           const formData = {
             title: e.target.title.value,
@@ -59,20 +67,30 @@ function Update() {
           .then(res => res.json())
           .then(data=> {
             console.log(data)
-            toast.success('successfully added');
+            setLoading(false);
+            toast.success('successfully updated');
           })
           .catch(err => {
             console.log(err)
+             toast.error('could not update');
           })
          
       
         }
 
+         if(loading){
+    return (
+      <div>
+        <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
+      </div>
+    )
+  }
+
   return (
     <div>
       <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Update Movies</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Update Movie</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* title Field */}
           <div>

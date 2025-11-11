@@ -6,11 +6,20 @@ import { ToastContainer } from 'react-toastify'
 
 function MainLayout() {
   return (
-    <div className='my-0'>
-      <div className='max-w-7xl mx-auto'>
+    <div>
+      <div className='flex flex-col min-h-screen'>
         <Navbar></Navbar>
-      <div className='my-10 mx-15'>
+      <div className=' flex-grow'>
+        <div className=' grid grid-cols-12'>
+        <div className='col-span-1'></div>
+
+        <div className='col-span-10 ' >
         <Outlet></Outlet>
+      </div>
+
+<div className='col-span-1'></div>
+
+      </div>
       </div>
       <Footer></Footer>
       </div>

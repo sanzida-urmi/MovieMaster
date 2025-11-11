@@ -32,7 +32,6 @@ function Navbar() {
  {
         user && 
         <>
-        <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/myprofile">My Profile</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/my-collection">My Collections</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/add" >Add Movie</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/watchlist" >My Watchlist</NavLink></li>
@@ -70,7 +69,7 @@ function Navbar() {
       </ul>
     </div>
     <img className='h-20' src={logo} alt="" />
-    <a className="btn btn-ghost text-xl">movieMaster</a>
+    <a className="btn btn-ghost text-xl">movieMaster Pro</a>
   </div>
   <div className="navbar-center navv hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -86,12 +85,15 @@ function Navbar() {
         
                  (
             <div className='dropdown drawer-end z-50'>
+
+
                        <div tabIndex={0} role="button" className='btn btn-ghost btn-circle avatar'>
               <div className='w-9 border-2 border-red-300 rounded-full'>
-                <img referrerPolicy='"no-referrer' src={user.photoURL || "https://via.placeholder.com/88"} alt="" />
+                <img referrerPolicy='no-referrer' src={user?.photoURL || "https://via.placeholder.com/88"} alt="" />
 
               </div>
             </div>
+
                      <ul
            tabIndex="-1"
            className='menu menu-sm dropdown-content bg-red-300 rounded-box z-50 mt-3 w-52 p-2 shadow'>
@@ -100,13 +102,14 @@ function Navbar() {
               <div className='pb-3 border-b border-b-red-300'>
                 <li className='text-sm font-bold'>{user.displayName}</li>
                 <li className='text-xs'>{user.email}</li>
+               
 
               </div>
 
               </ul>
 
 
-              <button onClick={signouthandle} className="btn btn-error ml-3">
+              <button onClick={signouthandle} className="btn ml-5 mr-3 btn-error ml-3">
              <Link to="/login">Logout</Link>
            </button>
               </div>

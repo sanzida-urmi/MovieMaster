@@ -66,8 +66,23 @@ const AuthProvider = ({ children }) => {
     }
     return (
         <AuthContext value={authInfo}>
-            {children}
+          {
+         children
+          }
+            
         </AuthContext>
+        // <AuthContext value={authInfo}>
+        //   {
+        //   loading? (
+        //     <div className='bg-yellow-500 text-center h-50 w-50'>
+        //       loading
+        //     </div>
+        //   ) : (children)
+        //   }add
+            
+        // </AuthContext>
+
+
     );
 };
 
