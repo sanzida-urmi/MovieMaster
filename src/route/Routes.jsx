@@ -26,8 +26,7 @@ export const router = createBrowserRouter([
         element:<ErrorBoundary>
          <Home></Home>
          </ErrorBoundary>,
-        // hydrateFallbackElement: <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />,
-        // loader:  () => fetch('http://localhost:4000/movies')
+       
       },
       {
         path: "/login",
@@ -83,7 +82,7 @@ export const router = createBrowserRouter([
           </ErrorBoundary>
         ),
 
-        loader: () => fetch("http://localhost:4000/watch"),
+        loader: () => fetch("https://moviemasterserver.vercel.app/watch"),
       },
       {
         path: "/movies/my-collection",

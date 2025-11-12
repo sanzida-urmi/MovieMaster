@@ -5,8 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 
 function PrivateRoute({children}) {
    const {user, loading} =use(AuthContext);
-//   const location = useLocation();
-//   console.log(location);
 
   if(loading){
     return(
@@ -17,8 +15,7 @@ function PrivateRoute({children}) {
   }
 
   if(!user){
-    // localStorage.setItem("store",location.pathname);
-    // return <Navigate to="/" state={location.pathname}/>
+    
     return <Navigate to="/"/>
   }
 

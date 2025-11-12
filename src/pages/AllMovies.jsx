@@ -8,7 +8,6 @@ import { ClimbingBoxLoader } from 'react-spinners';
 
 function AllMovies() {
   
-      // const data = useLoaderData()
        const {loading,setLoading} = use(AuthContext);
          const [data, setData] = useState([])
        
@@ -16,16 +15,16 @@ function AllMovies() {
 
         useEffect(()=>{
            setLoading(true);
-       fetch("http://localhost:4000/movies")
+       fetch("https://moviemasterserver.vercel.app/movies")
        .then(res=>res.json())
        .then(data =>{
-         console.log(data)
+        //  console.log(data)
          setData(data)
          setLoading(false);
          toast.success("Show all movie");
        })
        .catch(err =>{
-         console.log(err);
+        //  console.log(err);
          toast.error("could not show all movie")
        })
          },[])

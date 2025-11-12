@@ -22,22 +22,22 @@ const applyFilters =()=>{
     const genreString = selectedGenres.join(',');
     setLoading(true);
 
-    fetch(`http://localhost:4000/genre?genres=${genreString}`)
+    fetch(`https://moviemasterserver.vercel.app/genre?genres=${genreString}`)
     .then(res=>res.json())
     .then(data =>{
-         console.log(data)
+        //  console.log(data)
         setAry(data);
         setLoading(false);
         toast.success("Show movie");
         })
         .catch(err =>{
-                 console.log(err);
+                //  console.log(err);
                  toast.error("could not show movie")
                })
     
 }
 
-  console.log(selectedGenres);
+  // console.log(selectedGenres);
 
   
  if(loading){

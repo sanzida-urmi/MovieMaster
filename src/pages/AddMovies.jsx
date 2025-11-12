@@ -2,12 +2,11 @@ import React, { use, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { toast } from 'react-toastify';
 import { ClimbingBoxLoader } from 'react-spinners';
-import { number } from 'framer-motion';
 
 function AddMovies() {
     const {user} = use(AuthContext);
     const [loading, setLoading] = useState(false);
-    console.log(user);
+    // console.log(user);
 
 
     const handleSubmit = (e) => {
@@ -29,9 +28,9 @@ function AddMovies() {
       addedAt: new Date().toISOString(),
       addedBy: user.email
     }
-    console.log(formData);
+    // console.log(formData);
 
-    fetch('http://localhost:4000/movies', {
+    fetch('https://moviemasterserver.vercel.app/movies', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,12 +39,12 @@ function AddMovies() {
     })
     .then(res => res.json())
     .then(data=> {
-      console.log(data)
+      // console.log(data)
       setLoading(false);
       toast.success('successfully added');
     })
     .catch(err => {
-      console.log(err)
+      // console.log(err)
       toast.error('cound not add');
     })
    

@@ -10,11 +10,10 @@ function MovieDetails() {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-    //  const navigate = useNavigate();
     const location = useLocation();
     const navigate = useNavigate();
 
-  console.log(user?.email);
+  // console.log(user?.email);
 const [show, setShow] = useState(false)  
 
  
@@ -32,7 +31,7 @@ const [show, setShow] = useState(false)
      
 
     
-    fetch(`http://localhost:4000/movies/${id}`, {
+    fetch(`https://moviemasterserver.vercel.app/movies/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +39,7 @@ const [show, setShow] = useState(false)
     })
     .then(res => res.json())
     .then(data=> {
-      console.log(data)
+      // console.log(data)
       navigate('/movies')
        toast.success('successfully deleted');
 
@@ -51,7 +50,7 @@ const [show, setShow] = useState(false)
     });
     })
     .catch(err => {
-      console.log(err)
+      // console.log(err)
        toast.error('could not delete');
     })
 
@@ -64,25 +63,16 @@ const [show, setShow] = useState(false)
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:4000/movies/${id}`
-        
-//         , {
-//       headers: {
-//         authorization: `Bearer ${user.accessToken}`,
-//       },
-// }
-
-)
+    fetch(`https://moviemasterserver.vercel.app/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data.result);
         setMovie(data.result);
-        // console.log(" Api called!")
         setLoading(false);
          toast.success("Show details");
       })
       .catch(err =>{
-                       console.log(err);
+                      //  console.log(err);
                        toast.error("could not show details")
                      });
   }, [user, id]);
@@ -122,7 +112,7 @@ useEffect(()=>{
     };
   console.log(watchdata)
 
-     fetch('http://localhost:4000/watch', {
+     fetch('https://moviemasterserver.vercel.app/watch', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -131,17 +121,16 @@ useEffect(()=>{
         })
         .then(res => res.json())
         .then(data=> {
-          console.log(data)
+          // console.log(data)
           toast.success('successfully added to watchlist');
         })
         .catch(err => {
-          console.log(err)
+          // console.log(err)
            toast.error('could not add to watchlist');
         })
       }
       else{
-        // navigate('/login')
-// navigate("/login", { state: { from: location.pathname } });
+       
 navigate("/login",{state:{from:location.pathname}});
       }
   };

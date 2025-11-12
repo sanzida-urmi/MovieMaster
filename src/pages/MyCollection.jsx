@@ -1,6 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
-import MovieCard from '../components/MovieCard';
 import MycollectionList from './MycollectionList';
 import { ClimbingBoxLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
@@ -11,7 +10,7 @@ function MyCollection() {
   const [loading, setLoading] = useState(false);
   
 
-  console.log(user);
+  // console.log(user);
 
      useEffect(() => {
       setLoading(true);
@@ -20,18 +19,9 @@ function MyCollection() {
             return
          }
 
-    fetch(`http://localhost:4000/movies/my-collection?email=${user.email}`
-        
-    //     , {
-    //   headers: {
-    //     authorization: `Bearer ${user.accessToken}`,
-    //   },
-    // }
-
-)
+    fetch(`https://moviemasterserver.vercel.app/movies/my-collection?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
         setCollection(data);
         
         // console.log(data[0]);
@@ -39,12 +29,12 @@ function MyCollection() {
          toast.success("Show collection");
       })
       .catch(err =>{
-                       console.log(err);
+                      //  console.log(err);
                        toast.error("could not show collection")
                      });
   }, [user,refetch]);
 
-console.log(collection);
+// console.log(collection);
 
  if(loading){
     return (

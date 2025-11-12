@@ -1,11 +1,9 @@
 import React, { use, useEffect, useState } from 'react'
-import { useLoaderData } from 'react-router'
 import MovieCard from '../components/MovieCard'
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Pagination,Autoplay,Navigation} from "swiper/modules";
 import { PiStarDuotone } from "react-icons/pi";
 import { BsMoonStars } from "react-icons/bs";
-import star from "../assets/star.png"
 import starr from "../assets/starr.png"
 import {motion} from 'framer-motion';
 import "swiper/css";
@@ -21,7 +19,6 @@ import img6 from "../assets/img6.jpg";
 import img7 from "../assets/img7.jpg";
 import img8 from "../assets/img8.jpg";
 import "swiper/css/autoplay";
-import { AuthContext } from '../context/AuthContext';
 import { ClimbingBoxLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 
@@ -36,16 +33,16 @@ function Home() {
 
   useEffect(()=>{
     setLoading(true);
-    fetch("http://localhost:4000/users/count")
+    fetch("https://moviemasterserver.vercel.app/users/count")
     .then(res => res.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       setTotaluser(data.totalUsers)
       toast.success("successfully count user");
       setLoading(false)
     })
     .catch(err =>{
-  console.log(err)
+  // console.log(err)
   toast.error("could not count user")
 })
   },[])
@@ -54,17 +51,17 @@ function Home() {
 
   useEffect(()=>{
     setLoading(true);
-fetch("http://localhost:4000/rate")
+fetch("https://moviemasterserver.vercel.app/rate")
 .then(res=>res.json())
 .then(data =>{
-  console.log(data)
+  // console.log(data)
   setLoading(false);
   setRatedmovie(data)
   toast.success("Show top movie");
   
 })
 .catch(err =>{
-  console.log(err);
+  // console.log(err);
   toast.error("could not show top movie")
 })
   },[])
@@ -74,16 +71,16 @@ fetch("http://localhost:4000/rate")
 
    useEffect(()=>{
     setLoading(true);
-fetch("http://localhost:4000/recent")
+fetch("https://moviemasterserver.vercel.app/recent")
 .then(res=>res.json())
 .then(data =>{
-  console.log(data)
+  // console.log(data)
   setRecentmovie(data)
   setLoading(false);
   toast.success("Show latest movie");
 })
 .catch(err =>{
-  console.log(err);
+  // console.log(err);
   toast.error("could not show latest movie")
 })
   },[])
@@ -92,23 +89,22 @@ fetch("http://localhost:4000/recent")
 
   useEffect(()=>{
     setLoading(true);
-fetch("http://localhost:4000/movies")
+fetch("https://moviemasterserver.vercel.app/movies")
 .then(res=>res.json())
 .then(data =>{
-  console.log(data)
+  // console.log(data)
   setData(data)
   setLoading(false);
   toast.success("Show slider");
 })
 .catch(err =>{
-  console.log(err);
+  // console.log(err);
   toast.error("could not show slider")
 })
   },[])
 
 
-  // const data = useLoaderData()
-  console.log(data)
+  // console.log(data)
 
    if(loading){
     return (
@@ -120,6 +116,7 @@ fetch("http://localhost:4000/movies")
 
   return (
     <div>
+     
     <div className="flex justify-center mb-20">
       
         <Swiper
@@ -153,6 +150,7 @@ fetch("http://localhost:4000/movies")
 
     <h1 className='wrap-anywhere'>Total Movies: {data.length}</h1>
     <h1 className='wrap-anywhere'>Total Users: {totaluser}</h1>
+
 
 
 <div className="text-center text-xl font-bold mt-20 wrap-anywhere">Top 5 highest-rated movies</div>
@@ -202,21 +200,21 @@ fetch("http://localhost:4000/movies")
 
 
 {/* genre card  */}
-<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-20 wrap-anywhere'>
+<div className='grid grid-cols-1 sm:grid-cols-2 overflow-x-hidden lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-20 wrap-anywhere'>
 
 
 
-<div className="card bg-base-100 image-full  w-60 h-50  shadow-sm">
+<div className="card bg-base-100 image-full  w-60 h-50 wrap-anywhere shadow-sm">
   <figure>
     <img
-    className='object-cover h-full w-full'
+    className='object-cover h-full w-full wrap-anywhere'
       src={img6}
       alt="Shoes" />
   </figure>
   <div className="card-body">
-    <h2 className="card-title">Action</h2>
-    <p>Fast-paced stories full of thrill, fights, and excitement</p>
-    <div className="card-actions justify-end">
+    <h2 className="card-title wrap-anywhere">Action</h2>
+    <p className='wrap-anywhere'>Fast-paced stories full of thrill, fights, and excitement</p>
+    <div className="card-actions wrap-anywhere justify-end">
       <BiCameraMovie size={32}  />
     </div>
   </div>

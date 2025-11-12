@@ -14,18 +14,10 @@ function Mywatch() {
                 return
              }
     
-        fetch(`http://localhost:4000/watch?email=${user.email}`
-            
-        //     , {
-        //   headers: {
-        //     authorization: `Bearer ${user.accessToken}`,
-        //   },
-        // }
-    
-    )
+        fetch(`https://moviemasterserver.vercel.app/watch?email=${user.email}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
+            // console.log(data)
             setCollection(data);
             
             // console.log(data[0]);
@@ -33,7 +25,7 @@ function Mywatch() {
             toast.success('show watchlist');
           })
            .catch(err => {
-                console.log(err)
+                // console.log(err)
                 toast.error('cound not show watchlist');
               })
       }, [user]);

@@ -25,21 +25,17 @@ function Rating() {
     }
 
        setLoading(true);
-    // const res = await fetch(`http://localhost:4000/rating?min=${min}&max=${max}`);
-    // const data = await res.json();
-    // setAry(data);
-    // setLoading(false);
 
-     fetch(`http://localhost:4000/rating?min=${min}&max=${max}`)
+     fetch(`https://moviemasterserver.vercel.app/rating?min=${min}&max=${max}`)
         .then(res=>res.json())
         .then(data =>{
-             console.log(data)
+            //  console.log(data)
             setAry(data);
     setLoading(false);
             toast.success("Show movie");
             })
             .catch(err =>{
-                     console.log(err);
+                    //  console.log(err);
                      toast.error("could not show movie")
                    })
   };

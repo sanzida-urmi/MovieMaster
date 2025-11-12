@@ -13,12 +13,10 @@ import { updateProfile } from "firebase/auth";
 function Register() {
   const { signInWithGoogle,setLoading,createUser,setUser,setTotaluser,totaluser } = use(AuthContext);
   const [see, setSee] = useState(false);
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // console.log(location.state?.from)
+ 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.state?.from)
+    // console.log(location.state?.from)
 
 
 
@@ -26,7 +24,7 @@ function Register() {
     setLoading(true);
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         setUser(result.user)
 
         
@@ -36,8 +34,7 @@ function Register() {
               image: result.user.photoURL
             }
 
-            // create user in database 
-            fetch('http://localhost:4000/users',{
+            fetch('https://moviemasterserver.vercel.app/users',{
               method: 'POST',
               headers: {
                 'content-type' : 'application/json'
@@ -46,30 +43,18 @@ function Register() {
             })
             .then(res => res.json())
             .then(data => {
-              console.log('data after user save', data)
+              // console.log('data after user save', data)
             })
              setLoading(false)
         toast.success("Registration successful");
-        //  navigate("/");
         
-        // navigate(location.state?.from || "/");
         navigate(location.state?.from ||"/");
 
         })
         .catch(err => {
-            console.log(err);
+            // console.log(err);
         })
 
-       
-
-        // navigate(location?.state || "/");
-       
-
-      // })
-      // .catch((error) => {
-      //   setLoading(false)
-      //   console.log(error);
-      // });
   }
 
    const submithandle = (e) => {
@@ -97,16 +82,13 @@ function Register() {
       const user = res.user;
       setLoading(false);
 
-      // const stored = localStorage.getItem("store") || "/";
-      // localStorage.removeItem("store");
-
       updateProfile(user, {
         displayName: name,
         photoURL: photo,
       })
         .then(() => {
           setUser({ ...user, displayName: name, photoURL: photo });
-          console.log(user);
+          // console.log(user);
 
 
            const newUser ={
@@ -115,8 +97,7 @@ function Register() {
               image: user.photoURL
             }
 
-            // create user in database 
-            fetch('http://localhost:4000/users',{
+            fetch('https://moviemasterserver.vercel.app/users',{
               method: 'POST',
               headers: {
                 'content-type' : 'application/json'
@@ -125,27 +106,16 @@ function Register() {
             })
             .then(res => res.json())
             .then(data => {
-              console.log('data after user save', data)
+              // console.log('data after user save', data)
             })
-
-
-
-//             const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-//            console.log(prevUsers)
-//            const final =  prevUsers.filter(rev => rev!== user.email)    
-//   const updateUsers = [...final, user.email]
-//   localStorage.setItem("users",JSON.stringify(updateUsers))
-//   setTotaluser(updateUsers)
-// console.log(updateUsers)
 
  navigate(location.state?.from ||"/");
  toast.success("successfully login")
 
-          // navigate(stored);
         })
         .catch((e) => {
           setLoading(false)
-          console.log(e);
+          // console.log(e);
           toast.error(e.message);
         });
     });

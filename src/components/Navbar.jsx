@@ -50,7 +50,6 @@ function Navbar() {
         navigate("/");
       })
       .catch((e) => {
-        // setLoading(false);
         toast.error(e.message);
         console.log(e.message);
       });

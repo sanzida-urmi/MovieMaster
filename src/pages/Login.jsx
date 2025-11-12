@@ -9,17 +9,16 @@ import { IoEyeOff } from "react-icons/io5";
 function Login() {
   const { signInWithGoogle,signInUser,setLoading,setUser } = use(AuthContext);
     const [see, setSee] = useState(false);
-    //  const navigate = useNavigate();
-    //  const location = useLocation();
+  
         const navigate = useNavigate();
         const location = useLocation();
-        console.log(location.state?.from);
+        // console.log(location.state?.from);
 
      const handleGoogle=()=>{
                       setLoading(true);
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         setUser(result.user)
         setLoading(false)
         toast.success("Login successful");
@@ -31,8 +30,7 @@ function Login() {
               image: result.user.photoURL
             }
 
-            // create user in database 
-            fetch('http://localhost:4000/users',{
+            fetch('https://moviemasterserver.vercel.app/users',{
               method: 'POST',
               headers: {
                 'content-type' : 'application/json'
@@ -41,20 +39,16 @@ function Login() {
             })
             .then(res => res.json())
             .then(data => {
-              console.log('data after user save', data)
+              // console.log('data after user save', data)
             })
 
-
-        // navigate(location?.state || "/");
-        // navigate("/");
-// navigate(location.state.from || "/")
 navigate(location.state?.from || "/");
 
 
       })
       .catch((error) => {
         setLoading(false)
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -63,19 +57,15 @@ navigate(location.state?.from || "/");
   setLoading(true);
 const email = e.target.email.value;
 const password =  e.target.password.value;
-console.log(email,password)
+// console.log(email,password)
 
 signInUser(email,password)
 .then(res => {
     const user = res.user;
-    console.log(user);
+    // console.log(user);
     setUser(user);
 setLoading(false)
-    // const stored = location.state || localStorage.getItem("store") || "/";
-    //   localStorage.removeItem("store");
-    //   console.log(stored);
-
-
+ 
 
       const newUser ={
               name: user.displayName,
@@ -83,8 +73,7 @@ setLoading(false)
               image: user.photoURL
             }
 
-            // create user in database 
-            fetch('http://localhost:4000/users',{
+            fetch('https://moviemasterserver.vercel.app/users',{
               method: 'POST',
               headers: {
                 'content-type' : 'application/json'
@@ -97,18 +86,6 @@ setLoading(false)
             })
 
             
-
-//         const prevUsers = JSON.parse(localStorage.getItem("users")) || [];
-//            console.log(prevUsers)
-//            const final =  prevUsers.filter(rev => rev!== user.email)    
-//   const updateUsers = [...final, user.email]
-//   localStorage.setItem("users",JSON.stringify(updateUsers))
-//   setTotaluser(updateUsers)
-// console.log(updateUsers)
-
-
-
-      // navigate(stored);
       navigate(location.state?.from || "/");
 
       toast.success("successfully login")

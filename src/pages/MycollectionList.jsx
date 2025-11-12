@@ -23,7 +23,7 @@ function MycollectionList({movie}) {
          
     
         
-        fetch(`http://localhost:4000/movies/${_id}`, {
+        fetch(`https://moviemasterserver.vercel.app/movies/${_id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -31,7 +31,7 @@ function MycollectionList({movie}) {
         })
         .then(res => res.json())
         .then(data=> {
-          console.log(data)
+          // console.log(data)
           setRefecth(!refetch)
           // navigate('/movies')
     

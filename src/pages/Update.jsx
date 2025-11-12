@@ -12,25 +12,17 @@ function Update() {
 
      useEffect(() => {
       setLoading(true);
-        fetch(`http://localhost:4000/movies/update/${id}`
-            
-    //         , {
-    //       headers: {
-    //         authorization: `Bearer ${user.accessToken}`,
-    //       },
-    // }
-    
-    )
+        fetch(`https://moviemasterserver.vercel.app/movies/update/${id}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log(data.result);
+            // console.log(data.result);
             setMovie(data.result);
-            console.log(" Api called!")
+            // console.log(" Api called!")
             setLoading(false);
             toast.success("update page");
           })
           .catch(err =>{
-            console.log(err)
+            // console.log(err)
             toast.error("could not fetch update page")
           });
       }, [user, id]);
@@ -57,7 +49,7 @@ function Update() {
           }
           console.log(formData);
       
-          fetch(`http://localhost:4000/movies/update/${id}`, {
+          fetch(`https://moviemasterserver.vercel.app/movies/update/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -66,12 +58,12 @@ function Update() {
           })
           .then(res => res.json())
           .then(data=> {
-            console.log(data)
+            // console.log(data)
             setLoading(false);
             toast.success('successfully updated');
           })
           .catch(err => {
-            console.log(err)
+            // console.log(err)
              toast.error('could not update');
           })
          
