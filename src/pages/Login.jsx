@@ -126,12 +126,12 @@ setLoading(false)
     <div className="flex break-all justify-center items-center  min-h-screen">
     
 
-      <div className="flex gap-5 ">
+      <div className="flex flex-col md:flex-row gap-5 wrap-anywhere">
         <div>
           <img className="h-100 w-100" src={loginImg} alt="" />
         </div>
 
-        <div className="card bg-red-300 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-red-300 w-full max-w-sm shrink-0 shadow-2xl wrap-anywhere">
           
         <div className="card-body text-orange-600">
 <h1 className="text-red-700 text-2xl font-semibold">Please Login</h1>
@@ -209,6 +209,8 @@ setLoading(false)
           
         </div>
       </div>
+
+
       </div>
 
     </div>

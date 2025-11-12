@@ -48,9 +48,9 @@ const applyFilters =()=>{
     )
   }
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 wrap-anywhere'>
           <div className='filter-section'>
-            <h3 className='mb-5'>Filter by genre</h3>
+            <h3 className='mb-5 wrap-anywhere'>Filter by genre</h3>
        
 
             {["Sci-Fi","Action","Romance","Fantasy","Drama","Crime","Thriller","Animation","Mystery"].map(genre => (
@@ -68,7 +68,7 @@ const applyFilters =()=>{
       </div>
       <button className='btn btn-error' onClick={applyFilters}>Apply</button>
 
-       <div className="grid grid-cols-3 gap-10 mt-10">
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
          {ary.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>

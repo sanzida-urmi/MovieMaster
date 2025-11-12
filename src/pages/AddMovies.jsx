@@ -54,14 +54,14 @@ function AddMovies() {
 
   if(loading){
     return (
-      <div>
+      <div className='wrap-anywhere'>
         <ClimbingBoxLoader className="text-center mx-auto" color="#db6a69" />
       </div>
     )
   }
   return (
     <div>
-      <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
+      <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl wrap-anywhere">
       <div className="card-body p-6 relative">
         <h2 className="text-2xl font-bold text-center mb-6">Add New Movie</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

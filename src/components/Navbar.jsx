@@ -40,6 +40,7 @@ function Navbar() {
      </>
 
       const signouthandle = () => {
+        console.log("k")
         setLoading(true);
     signOutUser()
       .then(() => {
@@ -49,15 +50,15 @@ function Navbar() {
         navigate("/");
       })
       .catch((e) => {
-        setLoading(false);
+        // setLoading(false);
         toast.error(e.message);
         console.log(e.message);
       });
   };
 
   return (
-    <div className="navbar shadow-sm   bg-base-300 rounded-2xl mt-0">
-  <div className="navbar-start nav">
+    <div className="navbar shadow-sm   bg-base-300 rounded-2xl mt-0 mb-10 flex flex-col md:flex-row items-start gap-3 md:items-stretch">
+  <div className="navbar-start nav  flex flex-col  sm:flex-row justify-start items-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
@@ -68,15 +69,21 @@ function Navbar() {
         {links}
       </ul>
     </div>
-    <img className='h-20' src={logo} alt="" />
-    <a className="btn btn-ghost text-xl">movieMaster Pro</a>
+    <div className='flex flex-col sm:flex-row justify-center items-start'>
+      <img className='h-10 sm:20' src={logo} alt="" />
+    <a className="btn btn-ghost text-sm sm:text-xl wrap-anywhere sm:word-wrap ">movieMaster Pro</a>
+    </div>
   </div>
+
+
   <div className="navbar-center navv hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       {links}
     </ul>
   </div>
-  <div className="navbar-end">
+  
+
+  <div className="navbar-end  flex flex-col sm:flex-row gap-3 items-start sm:justify-start md:justify-end">
     
     
      {loading ? (
@@ -84,7 +91,8 @@ function Navbar() {
         ) : user ? 
         
                  (
-            <div className='dropdown drawer-end z-50'>
+                  <div className='flex flex-col gap-3 sm:flex-row justify-start items-start'>
+            <div className='dropdown drawer-end z-50 '>
 
 
                        <div tabIndex={0} role="button" className='btn btn-ghost btn-circle avatar'>
@@ -107,11 +115,11 @@ function Navbar() {
               </div>
 
               </ul>
+</div>
 
-
-              <button onClick={signouthandle} className="btn ml-5 mr-3 btn-error ml-3">
+              <button onClick={signouthandle} className="btn wrap-anywhere  btn-error sm:ml-3 md:ml-7">
              <Link to="/login">Logout</Link>
-           </button>
+           </button>  
               </div>
 
          )

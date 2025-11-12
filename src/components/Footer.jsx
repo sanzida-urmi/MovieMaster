@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 function Footer() {
   return (
-   <footer className="footer sm:footer-horizontal mt-10 bg-base-300 text-base-content p-10 rounded-2xl">
+   <footer className="footer sm:footer-horizontal mt-10 bg-base-300 text-base-content p-10 rounded-2xl  wrap-anywhere">
     
   <nav>
     <h6 className="footer-title">Services</h6>

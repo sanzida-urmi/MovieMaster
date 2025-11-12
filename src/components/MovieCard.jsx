@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 function MovieCard({movie}) {
     const {posterUrl,genre,rating,title,_id,releaseYear} = movie
   return (
-    <div>
+    <div className='wrap-anywhere'>
       <div className="card bg-base-300 w-full h-110 shadow-sm">
   <figure>
     <img className='h-50 w-50 mt-10'

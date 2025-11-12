@@ -55,7 +55,7 @@ function Rating() {
 
   return (
     <div>
-     <div>
+     <div className='wrap-anywhere'>
        <form onSubmit={submit}>
         <fieldset className="fieldset">
           <label className="label">Min Rating</label>
@@ -68,7 +68,7 @@ function Rating() {
       </form>
      </div>
 
-      <div className="grid grid-cols-3 gap-10 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
          {ary.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>

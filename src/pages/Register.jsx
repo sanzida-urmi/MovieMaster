@@ -159,12 +159,12 @@ function Register() {
     <div className="flex break-all justify-center items-center  min-h-screen">
     
 
-      <div className="flex gap-15 ">
+      <div className="flex flex-col md:flex-row gap-15 rap-anywhere">
         <div>
           <img className="h-100 w-120" src={regimg} alt="" />
         </div>
 
-        <div className="card bg-red-300 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-red-300 w-full max-w-sm shrink-0 shadow-2xl rap-anywhere">
         <div className="card-body text-orange-600">
 <h1 className="text-red-700 text-2xl font-semibold">Please Register</h1>
           
@@ -264,6 +264,7 @@ function Register() {
           
         </div>
       </div>
+
       </div>
 
     </div>

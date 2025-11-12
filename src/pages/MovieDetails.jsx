@@ -148,18 +148,18 @@ navigate("/login",{state:{from:location.pathname}});
 
 
   return (
-    <div>
-      <div className="card bg-base-100 w-full gap-20 shadow-sm flex flex-row justify-center items-center mx-auto">
+    <div className=' wrap-anywhere'>
+      <div className="card bg-base-100 w-full gap-20 shadow-sm flex flex-col sm:flex-row justify-center items-center mx-auto">
  <div> <figure>
     <img
     className='h-200 w-full'
       src={movie.posterUrl}
       alt="Shoes" />
   </figure></div>
-  <div className="card-body">
+  <div className="card-body wrap-anywhere">
     <h2 className="card-title text-red-700 text-4xl font-semibold mb-5 mx-auto">{movie.title}</h2>
     <p>Genre: {movie.genre}</p>
-    <p>ReleaseYear: {movie.releaseYear}</p>
+    <p className='wrap-anywhere'>ReleaseYear: {movie.releaseYear}</p>
     <p>Director: {movie.director}</p>
     <p>Cast: {movie.cast}</p>
     <p>Rating: {movie.rating}</p>

@@ -53,15 +53,18 @@ function MycollectionList({movie}) {
 
   return (
     <div>
-         <ul className="list bg-base-200 rounded-box shadow-md">  
+         <ul className="list bg-base-200 rounded-box shadow-md wrap-anywhere">  
   <li className="list-row">
-    <div><img className="size-10 rounded-box" src={posterUrl}/></div>
-    <div>
+    <div className=' items-start justify-center flex flex-col'>
+      <img className="size-10 rounded-box" src={posterUrl}/></div>
+    <div className=' items-start justify-center flex flex-col'>
       <div>{title}</div>
       <div className="text-xs uppercase font-semibold opacity-60">{genre}</div>
     </div>
-    <Link to={`/movies/update/${_id}`} className="btn btn-active  btn-error">Edit</Link>
+    <div className='flex flex-col sm:flex-row gap-4'>
+      <Link to={`/movies/update/${_id}`} className="btn btn-active  btn-error">Edit</Link>
           <button onClick={()=>handleDlete(_id)} className="btn btn-error">Delete</button>
+    </div>
 
   </li>
   

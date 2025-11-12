@@ -7,6 +7,7 @@ import { ClimbingBoxLoader } from 'react-spinners';
 
 
 function AllMovies() {
+  
       // const data = useLoaderData()
        const {loading,setLoading} = use(AuthContext);
          const [data, setData] = useState([])
@@ -40,12 +41,14 @@ function AllMovies() {
   return (
 <div>
  
-  <button className='btn btn-error mr-5'> <Link to='/genre'>Filter by genre</Link> </button>
-  <button className='btn btn-error'> <Link to='/rating'>Filter by rating</Link> </button>
+  <div className='flex flex-col justify-center items-center sm:flex-row gap-4'>
+    <button className='btn btn-error wrap-anywhere'> <Link to='/genre'>Filter by genre</Link> </button>
+  <button className='btn btn-error wrap-anywhere'> <Link to='/rating'>Filter by rating</Link> </button>
+  </div>
 
-        <div className="text-center text-xl font-bold mt-10">All Movies</div>
+        <div className="text-center text-xl font-bold mt-20 wrap-anywhere">All Movies</div>
 
-             <div className="grid grid-cols-3 gap-10 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
          {data.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>
