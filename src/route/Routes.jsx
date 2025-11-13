@@ -98,9 +98,9 @@ export const router = createBrowserRouter([
         path: "/genre",
         element: (
           <ErrorBoundary>
-          <PrivateRoute>
+        
             <Genre />
-          </PrivateRoute>
+        
           </ErrorBoundary>
         ),
       },
@@ -108,9 +108,9 @@ export const router = createBrowserRouter([
         path: "/rating",
         element: (
           <ErrorBoundary>
-          <PrivateRoute>
+        
             <Rating />
-          </PrivateRoute>
+         
           </ErrorBoundary>
         ),
       }

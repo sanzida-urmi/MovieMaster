@@ -29,14 +29,14 @@ function Navbar() {
     const links = <>
     <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/">Home</NavLink></li>
      <li className='font-semibold'><NavLink to="/movies"  className={({isActive})=> isActive ? "active" : ""} end>All Movies</NavLink></li>
- {
-        user && 
-        <>
+ 
+       
+      
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/my-collection">My Collections</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/movies/add" >Add Movie</NavLink></li>
         <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/watchlist" >My Watchlist</NavLink></li>
-        </>
-     }
+        <li className='font-semibold'><NavLink className={({isActive})=> isActive ? "active" : ""} end to="/login" >Login</NavLink></li>
+
      </>
 
       const signouthandle = () => {

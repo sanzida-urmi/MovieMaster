@@ -8,7 +8,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [refetch, setRefecth] = useState(false)
 
     const createUser = (email, password) => {
@@ -64,25 +64,18 @@ const AuthProvider = ({ children }) => {
         loading,
         setLoading
     }
+
+   
+
+
     return (
-        <AuthContext value={authInfo}>
+        <AuthContext.Provider value={authInfo}>
           {
          children
           }
             
-        </AuthContext>
-        // <AuthContext value={authInfo}>
-        //   {
-        //   loading? (
-        //     <div className='bg-yellow-500 text-center h-50 w-50'>
-        //       loading
-        //     </div>
-        //   ) : (children)
-        //   }add
-            
-        // </AuthContext>
-
-
+        </AuthContext.Provider>
+       
     );
 };
 

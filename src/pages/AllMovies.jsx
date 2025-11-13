@@ -1,14 +1,16 @@
 import React,{use, useEffect, useState} from 'react'
-import { Link, NavLink, useLoaderData } from 'react-router'
+import { Link, NavLink, useLoaderData, useLocation, useNavigate } from 'react-router'
 import MovieCard from '../components/MovieCard'
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { ClimbingBoxLoader } from 'react-spinners';
+import { Navigate } from 'react-router';
 
 
 function AllMovies() {
-  
-       const {loading,setLoading} = use(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+       const {loading,setLoading,user} = use(AuthContext);
          const [data, setData] = useState([])
        
 
@@ -37,12 +39,14 @@ function AllMovies() {
     )
   }
 
+
   return (
 <div>
  
   <div className='flex flex-col justify-center items-center sm:flex-row gap-4'>
-    <button className='btn btn-error wrap-anywhere'> <Link to='/genre'>Filter by genre</Link> </button>
-  <button className='btn btn-error wrap-anywhere'> <Link to='/rating'>Filter by rating</Link> </button>
+    <Link className='btn btn-error wrap-anywhere' to="/genre"> Filter by genre</Link>
+  <Link className='btn btn-error wrap-anywhere' to="/rating">Filter by rating</Link>
+
   </div>
 
         <div className="text-center text-xl font-bold mt-20 wrap-anywhere">All Movies</div>

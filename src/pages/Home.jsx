@@ -171,7 +171,7 @@ fetch("https://moviemasterserver.vercel.app/movies")
 <div className="text-center text-xl font-bold mt-20 my-10 wrap-anywhere">Genres</div>
 <div className='flex flex-col md:flex-row gap-30 mx-auto justify-center items-center'>
 
-  <div className=' wrap-anywhere'>
+  <div className=' wrap-anywhere ani'>
   <motion.img
    transition={{
     repeat: Infinity,

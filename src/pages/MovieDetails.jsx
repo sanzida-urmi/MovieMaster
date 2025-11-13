@@ -103,8 +103,9 @@ useEffect(()=>{
   }
 
  const handlewatch = () => {
-  if(user)
-   { const watchdata = {
+  if(user){
+   
+     const watchdata = {
      title: movie.title,
      genre: movie.genre,
      posterUrl: movie.posterUrl,

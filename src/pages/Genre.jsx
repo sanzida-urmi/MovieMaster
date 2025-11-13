@@ -4,6 +4,7 @@ import { ClimbingBoxLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 
 function Genre() {
+ 
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [ary, setAry] = useState([]);
       const [loading, setLoading] = useState(false);

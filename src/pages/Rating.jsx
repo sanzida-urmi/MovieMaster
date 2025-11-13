@@ -20,7 +20,8 @@ function Rating() {
 
 
     if(min < 0 || max>10 || min> max){
-      toast("please enter ratings between 1 and 10 and min <= max ");
+      toast("please enter ratings between 0 and 10 and min <= max ");
+      setLoading(false);
       return;
     }
 

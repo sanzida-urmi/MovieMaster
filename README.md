@@ -12,4 +12,5 @@ Key Features
 7.Loading and toast notifications
 8.Advanced filtering
 
-Live URL : https://stunning-biscuit-867087.netlify.app
+sever live URL :https://moviemasterserver.vercel.app
+Live URL : https://quiet-raindrop-9f5788.netlify.app
