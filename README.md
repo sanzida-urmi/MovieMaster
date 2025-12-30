@@ -1,4 +1,8 @@
 # MovieMaster Pro 🎬
+## 📄 Short Description
+MovieMaster Pro is a web-based movie management application that allows users to browse, add, edit, delete, and track their personal movie collections and watchlists with authentication, protected routes, and a modern, responsive interface.
+
+---
 
 ## 📖 Overview
 MovieMaster Pro is a comprehensive movie management web application that empowers users to browse, add, edit, delete, and manage their personal movie collections and watchlists. Built with modern web technologies, it offers a seamless user experience with authentication, protected routes, and full CRUD operations.
@@ -107,10 +111,7 @@ cd MovieMaster
 ## 2.  Install Dependencies
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
+
 ```
 
 ## 3. Environment Variables Setup
@@ -128,10 +129,7 @@ VITE_FIREBASE_APP_ID=your_app_id
 ## 4. Run the Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
 ```
 
 ## 5. Open in Browser
