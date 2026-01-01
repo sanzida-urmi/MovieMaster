@@ -58,6 +58,7 @@ function AddMovies() {
       </div>
     )
   }
+  
   return (
     <div>
       <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl wrap-anywhere">

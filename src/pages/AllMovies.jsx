@@ -23,11 +23,11 @@ function AllMovies() {
         //  console.log(data)
          setData(data)
          setLoading(false);
-         toast.success("Show all movie");
+        //  toast.success("Show all movie");
        })
        .catch(err =>{
         //  console.log(err);
-         toast.error("could not show all movie")
+        //  toast.error("could not show all movie")
        })
          },[])
 
@@ -51,7 +51,7 @@ function AllMovies() {
 
         <div className="text-center text-xl font-bold mt-20 wrap-anywhere">All Movies</div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
          {data.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>

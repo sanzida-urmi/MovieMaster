@@ -56,7 +56,8 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar shadow-sm   bg-base-300 rounded-2xl mt-0 mb-10 flex flex-col md:flex-row items-start gap-3 md:items-stretch">
+    <div className='bg-base-300 '>
+      <div className="navbar  mx-auto top-0 w-10/12  bg-base-300   flex flex-col md:flex-row items-start gap-3 md:items-stretch">
   <div className="navbar-start nav  flex flex-col  sm:flex-row justify-start items-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -138,7 +139,9 @@ function Navbar() {
            defaultChecked={localStorage.getItem('theme') === "dark"}
            className="toggle ml-3"/>
   </div>
+  
 </div>
+    </div>
   )
 }
 

@@ -21,6 +21,7 @@ import img8 from "../assets/img8.jpg";
 import "swiper/css/autoplay";
 import { ClimbingBoxLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router';
 
 function Home() {
   const [ratedmovie, setRatedmovie] = useState([])
@@ -38,12 +39,12 @@ function Home() {
     .then(data => {
       // console.log(data)
       setTotaluser(data.totalUsers)
-      toast.success("successfully count user");
+      // toast.success("successfully count user");
       setLoading(false)
     })
     .catch(err =>{
   // console.log(err)
-  toast.error("could not count user")
+  // toast.error("could not count user")
 })
   },[])
 
@@ -57,12 +58,12 @@ fetch("https://moviemasterserver.vercel.app/rate")
   // console.log(data)
   setLoading(false);
   setRatedmovie(data)
-  toast.success("Show top movie");
+  // toast.success("Show top movie");
   
 })
 .catch(err =>{
   // console.log(err);
-  toast.error("could not show top movie")
+  // toast.error("could not show top movie")
 })
   },[])
 
@@ -77,11 +78,11 @@ fetch("https://moviemasterserver.vercel.app/recent")
   // console.log(data)
   setRecentmovie(data)
   setLoading(false);
-  toast.success("Show latest movie");
+  // toast.success("Show latest movie");
 })
 .catch(err =>{
   // console.log(err);
-  toast.error("could not show latest movie")
+  // toast.error("could not show latest movie")
 })
   },[])
 
@@ -95,11 +96,11 @@ fetch("https://moviemasterserver.vercel.app/movies")
   // console.log(data)
   setData(data)
   setLoading(false);
-  toast.success("Show slider");
+  // toast.success("Show slider");
 })
 .catch(err =>{
   // console.log(err);
-  toast.error("could not show slider")
+  // toast.error("could not show slider")
 })
   },[])
 
@@ -117,7 +118,7 @@ fetch("https://moviemasterserver.vercel.app/movies")
   return (
     <div>
      
-    <div className="flex justify-center mb-20">
+    <div className="flex justify-center mb-10">
       
         <Swiper
         key={data.length}
@@ -151,11 +152,15 @@ fetch("https://moviemasterserver.vercel.app/movies")
     <h1 className='wrap-anywhere'>Total Movies: {data.length}</h1>
     <h1 className='wrap-anywhere'>Total Users: {totaluser}</h1>
 
-
+<div className='flex'>
+  {/* <button className='btn mx-auto btn-error mt-5 '> */}
+     <Link className='btn mx-auto btn-error mt-5' to='/movies'>Show All Movies</Link>
+      {/* </button> */}
+</div>
 
 <div className="text-center text-xl font-bold mt-20 wrap-anywhere">Top 5 highest-rated movies</div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
          {ratedmovie.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>
@@ -163,12 +168,13 @@ fetch("https://moviemasterserver.vercel.app/movies")
 
       <div className="text-center text-xl font-bold mt-20 wrap-anywhere">Latest movies</div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
          {recentmovie.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
 
       </div>
 
 <div className="text-center text-xl font-bold mt-20 my-10 wrap-anywhere">Genres</div>
+
 <div className='flex flex-col md:flex-row gap-30 mx-auto justify-center items-center'>
 
   <div className=' wrap-anywhere ani'>
@@ -184,7 +190,9 @@ fetch("https://moviemasterserver.vercel.app/movies")
 
 
 
-  <div><ul className='wrap-anywhere'>
+  <div>
+     
+    <ul className='wrap-anywhere'>
   <li className='flex items-center gap-2'><PiStarDuotone /> Action</li>
   <li className='flex items-center gap-2'><PiStarDuotone /> Adventure</li>
   <li className='flex items-center gap-2'><PiStarDuotone /> Comedy</li>
