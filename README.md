@@ -40,7 +40,7 @@ MovieMaster Pro is a comprehensive movie management web application that empower
 
 ## Demo
 
-Live URL : https://quiet-raindrop-9f5788.netlify.app
+Live URL : https://effulgent-tarsier-43c508.netlify.app
 
 ## 🖼️ Screenshots
 

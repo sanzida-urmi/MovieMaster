@@ -57,7 +57,7 @@ function Navbar() {
 
   return (
     <div className='bg-base-300 '>
-      <div className="navbar  mx-auto top-0 w-10/12  bg-base-300   flex flex-col md:flex-row items-start gap-3 md:items-stretch">
+      <div className="navbar  mx-auto top-0 w-10/12 px-0  bg-base-300   flex flex-col md:flex-row items-start gap-3 md:items-stretch">
   <div className="navbar-start nav  flex flex-col  sm:flex-row justify-start items-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
